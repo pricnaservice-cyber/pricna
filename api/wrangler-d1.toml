@@ -1,15 +1,16 @@
 name = "pricna-api"
-main = "worker-full.js"
+main = "worker.js"
 compatibility_date = "2024-10-01"
 
+[env.production]
 # D1 Database
-[[d1_databases]]
+[[env.production.d1_databases]]
 binding = "DB"
 database_name = "pricna-db"
 database_id = "349fbd92-9ef6-486f-bc7d-332ceb471c73"
 
 # Environment Variables
-[vars]
+[env.production.vars]
 NODE_ENV = "production"
 PORT = "8787"
 FRONTEND_URL = "https://pricna.cz"

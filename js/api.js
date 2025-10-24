@@ -1,6 +1,6 @@
 // API Configuration
 const API_CONFIG = {
-    baseURL: 'http://localhost:3000/api', // Změňte na produkční URL
+    baseURL: 'https://pricna-api.pricna-service.workers.dev/api', // Změňte na produkční URL
     timeout: 10000
 };
 

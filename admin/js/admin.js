@@ -1,5 +1,5 @@
 // API Configuration
-const API_URL = 'http://localhost:3000/api'; // Změňte na produkční URL
+const API_URL = 'https://pricna-api.pricna-service.workers.dev/api'; // Změňte na produkční URL
 
 // State
 let authToken = localStorage.getItem('authToken');

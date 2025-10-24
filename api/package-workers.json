@@ -1,0 +1,18 @@
+{
+  "name": "pricna-api-workers",
+  "version": "1.0.0",
+  "description": "Příčná Offices API - Cloudflare Workers version",
+  "main": "worker.js",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "deploy:prod": "wrangler deploy --env production"
+  },
+  "dependencies": {
+    "itty-router": "^5.0.0"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}
