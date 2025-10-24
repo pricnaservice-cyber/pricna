@@ -1,0 +1,7 @@
+# Cloudflare Pages redirects
+
+# API requests proxy to backend
+/api/*  https://your-api-worker.workers.dev/:splat  200
+
+# Admin subdomain
+https://rezervace.pricna.cz/*  /admin/:splat  200

@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Děkujeme za Vaši zprávu</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #2c5f8d 0%, #1a3a54 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        .header p {
+            margin: 10px 0 0;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 40px 30px;
+        }
+        .icon-check {
+            text-align: center;
+            font-size: 60px;
+            color: #28a745;
+            margin: 20px 0;
+        }
+        .message-box {
+            background-color: #e7f3ff;
+            border-left: 4px solid #2c5f8d;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+        .message-box p {
+            margin: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+        .info-box {
+            background-color: #f8f9fa;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 6px;
+        }
+        .info-box h3 {
+            margin: 0 0 15px;
+            color: #2c5f8d;
+            font-size: 18px;
+        }
+        .info-box p {
+            margin: 8px 0;
+            color: #333;
+        }
+        .contact-info {
+            background-color: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 25px 0;
+        }
+        .contact-info h3 {
+            margin: 0 0 15px;
+            color: #856404;
+            font-size: 18px;
+        }
+        .contact-info p {
+            margin: 5px 0;
+            color: #333;
+        }
+        .footer {
+            background-color: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+        .footer p {
+            margin: 5px 0;
+        }
+        .social-links {
+            margin: 15px 0;
+        }
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #2c5f8d;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>Děkujeme za Váš zájem</h1>
+            <p>Příčná Offices & Apartments</p>
+        </div>
+        
+        <div class="content">
+            <div class="icon-check">✓</div>
+            
+            <p style="font-size: 18px; text-align: center; color: #333; margin-bottom: 30px;">
+                Dobrý den <strong>{{name}}</strong>,
+            </p>
+            
+            <div class="message-box">
+                <p>
+                    děkujeme za Vaši zprávu. Vaši poptávku jsme úspěšně obdrželi a budeme se Vám věnovat v co nejkratší době.
+                </p>
+            </div>
+            
+            <p style="color: #666; line-height: 1.6;">
+                Náš tým nyní zpracovává Vaši poptávku a ozveme se Vám do <strong>24 hodin</strong> v pracovních dnech. 
+                Pokud je Vaše poptávka naléhavá, neváhejte nás kontaktovat telefonicky.
+            </p>
+            
+            {{#if itemName}}
+            <div class="info-box">
+                <h3>Váš zájem:</h3>
+                <p><strong>{{itemName}}</strong></p>
+            </div>
+            {{/if}}
+            
+            <div class="contact-info">
+                <h3>Potřebujete rychlou odpověď?</h3>
+                <p><strong>📞 Telefon:</strong> <a href="tel:+420608429100">+420 608 429 100</a> (majitel)</p>
+                <p><strong>✉️ Email:</strong> <a href="mailto:info@pricna.cz">info@pricna.cz</a></p>
+            </div>
+            
+            <p style="margin-top: 30px; color: #666; font-size: 14px;">
+                S pozdravem,<br>
+                <strong>Tým Příčná Offices & Apartments</strong>
+            </p>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Příčná Offices s.r.o.</strong></p>
+            <p>Příčná 1, 736 01 Havířov - Město</p>
+            <p>📧 info@pricna.cz | 📞 +420 608 429 100</p>
+            <div class="social-links">
+                <a href="https://www.facebook.com/pricna">Facebook</a> |
+                <a href="https://www.instagram.com/pricna_havirov">Instagram</a>
+            </div>
+            <p style="margin-top: 15px; font-size: 12px; color: #999;">
+                © 2025 Příčná Offices s.r.o. Všechna práva vyhrazena.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Rezervační systém | Příčná Offices</title>
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="login-screen" class="login-container">
+        <div class="login-box">
+            <div class="login-header">
+                <h1>🔐 Admin Přihlášení</h1>
+                <p>Rezervační systém Příčná Offices</p>
+            </div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="username">Uživatelské jméno</label>
+                    <input type="text" id="username" name="username" required autofocus>
+                </div>
+                <div class="form-group">
+                    <label for="password">Heslo</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div id="login-error" class="error-message" style="display: none;"></div>
+                <button type="submit" class="btn btn-primary">Přihlásit se</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="admin-dashboard" style="display: none;">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="container">
+                <div class="header-left">
+                    <h1>📅 Rezervační systém</h1>
+                    <p class="subtitle">Příčná Offices - Admin Panel</p>
+                </div>
+                <div class="header-right">
+                    <span class="user-info">
+                        <i class="fas fa-user"></i>
+                        <span id="logged-user">Admin</span>
+                    </span>
+                    <button id="logout-btn" class="btn btn-secondary">
+                        <i class="fas fa-sign-out-alt"></i> Odhlásit
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <div class="container">
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #28a745;">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="stat-today">0</h3>
+                            <p>Dnes</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #007bff;">
+                            <i class="fas fa-calendar-week"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="stat-week">0</h3>
+                            <p>Tento týden</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #ffc107;">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="stat-month">0</h3>
+                            <p>Tento měsíc</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon" style="background: #17a2b8;">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="stat-revenue">0 Kč</h3>
+                            <p>Tržby (měsíc)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Calendar Section -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <h2><i class="fas fa-calendar"></i> Kalendář rezervací</h2>
+                        <button id="create-reservation-btn" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Nová rezervace
+                        </button>
+                    </div>
+                    
+                    <div class="calendar-controls">
+                        <button id="prev-month" class="btn btn-icon">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <h3 id="calendar-month-year"></h3>
+                        <button id="next-month" class="btn btn-icon">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <div class="calendar-grid" id="admin-calendar">
+                        <!-- Calendar will be generated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Reservations List -->
+                <div class="section-card">
+                    <div class="section-header">
+                        <h2><i class="fas fa-list"></i> Seznam rezervací</h2>
+                        <div class="filter-buttons">
+                            <button class="filter-btn active" data-filter="all">Vše</button>
+                            <button class="filter-btn" data-filter="upcoming">Nadcházející</button>
+                            <button class="filter-btn" data-filter="past">Minulé</button>
+                        </div>
+                    </div>
+                    
+                    <div id="reservations-list">
+                        <!-- Reservations will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Create/Edit Reservation Modal -->
+    <div id="reservation-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Nová rezervace</h2>
+                <span class="modal-close">&times;</span>
+            </div>
+            <form id="reservation-form">
+                <input type="hidden" id="reservation-id">
+                
+                <div class="form-group">
+                    <label for="res-date">Datum *</label>
+                    <input type="date" id="res-date" name="date" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Časové sloty *</label>
+                    <div id="time-slots-selection" class="time-slots-grid">
+                        <!-- Time slots will be generated -->
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="res-name">Jméno a příjmení *</label>
+                        <input type="text" id="res-name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="res-email">Email *</label>
+                        <input type="email" id="res-email" name="email" required>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="res-phone">Telefon *</label>
+                        <input type="tel" id="res-phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="res-company">Společnost</label>
+                        <input type="text" id="res-company" name="company">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="res-message">Poznámka</label>
+                    <textarea id="res-message" name="message" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="res-price">Celková cena (Kč) *</label>
+                    <input type="number" id="res-price" name="totalPrice" required readonly>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" id="cancel-form">Zrušit</button>
+                    <button type="submit" class="btn btn-primary">Uložit rezervaci</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Reservation Detail Modal -->
+    <div id="detail-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Detail rezervace</h2>
+                <span class="modal-close">&times;</span>
+            </div>
+            <div id="detail-content">
+                <!-- Detail content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>

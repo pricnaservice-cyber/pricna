@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nová rezervace</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #28a745 0%, #1e7e34 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: 600;
+        }
+        .header p {
+            margin: 10px 0 0;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 30px;
+        }
+        .alert-box {
+            background-color: #d1ecf1;
+            border-left: 4px solid #0c5460;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .info-box {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+        .info-box h2 {
+            margin: 0 0 15px;
+            font-size: 18px;
+            color: #333;
+        }
+        .info-row {
+            display: flex;
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .info-row:last-child {
+            border-bottom: none;
+        }
+        .info-label {
+            font-weight: 600;
+            color: #555;
+            min-width: 140px;
+        }
+        .info-value {
+            color: #333;
+        }
+        .price-highlight {
+            background-color: #d4edda;
+            color: #155724;
+            font-size: 22px;
+            font-weight: bold;
+            padding: 12px;
+            text-align: center;
+            border-radius: 6px;
+            margin: 15px 0;
+        }
+        .action-buttons {
+            text-align: center;
+            margin: 25px 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            font-weight: 600;
+            margin: 5px;
+        }
+        .footer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>🔔 Nová rezervace</h1>
+            <p>Sdílené kanceláře - Recepce</p>
+        </div>
+        
+        <div class="content">
+            <div class="alert-box">
+                <strong>⚠️ Nová rezervace vyžaduje vaši pozornost</strong>
+                <p style="margin: 5px 0 0;">Rezervace byla úspěšně vytvořena a klient obdržel potvrzení.</p>
+            </div>
+            
+            <div class="info-box">
+                <h2>📋 Detaily rezervace</h2>
+                <div class="info-row">
+                    <span class="info-label">ID rezervace:</span>
+                    <span class="info-value">#{{reservationId}}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Datum:</span>
+                    <span class="info-value">{{date}}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Čas:</span>
+                    <span class="info-value">{{time}}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Doba trvání:</span>
+                    <span class="info-value">{{duration}}</span>
+                </div>
+            </div>
+            
+            <div class="info-box">
+                <h2>👤 Kontaktní údaje klienta</h2>
+                <div class="info-row">
+                    <span class="info-label">Jméno:</span>
+                    <span class="info-value">{{name}}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Email:</span>
+                    <span class="info-value"><a href="mailto:{{email}}">{{email}}</a></span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Telefon:</span>
+                    <span class="info-value"><a href="tel:{{phone}}">{{phone}}</a></span>
+                </div>
+                {{#if company}}
+                <div class="info-row">
+                    <span class="info-label">Společnost:</span>
+                    <span class="info-value">{{company}}</span>
+                </div>
+                {{/if}}
+                {{#if message}}
+                <div class="info-row">
+                    <span class="info-label">Poznámka:</span>
+                    <span class="info-value">{{message}}</span>
+                </div>
+                {{/if}}
+            </div>
+            
+            <div class="price-highlight">
+                Celková cena: {{totalPrice}} Kč
+            </div>
+            
+            <div class="action-buttons">
+                <a href="https://rezervace.pricna.cz" class="btn">Zobrazit v admin systému</a>
+            </div>
+            
+            <p style="margin-top: 30px; color: #666; font-size: 14px;">
+                <strong>Důležité:</strong> Ujistěte se, že prostory jsou připraveny před příchodem klienta.
+            </p>
+        </div>
+        
+        <div class="footer">
+            <p>Tento email byl automaticky vygenerován systémem rezervací Příčná Offices.</p>
+            <p style="margin-top: 10px;">© 2025 Příčná Offices s.r.o.</p>
+        </div>
+    </div>
+</body>
+</html>

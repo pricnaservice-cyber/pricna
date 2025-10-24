@@ -1,0 +1,44 @@
+# Dependencies
+api/node_modules/
+node_modules/
+
+# Environment variables
+api/.env
+.env
+
+# Database
+api/database/*.db
+api/database/*.db-journal
+
+# Logs
+*.log
+npm-debug.log*
+api/.npm
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Backups
+api/.env.backup.*
+*.backup
+
+# Build
+dist/
+build/
+
+# Temporary files
+*.tmp
+.cache/

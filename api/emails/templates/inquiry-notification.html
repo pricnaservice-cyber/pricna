@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nová poptávka</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #dc3545 0%, #b02a37 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 26px;
+            font-weight: 600;
+        }
+        .header p {
+            margin: 10px 0 0;
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 30px;
+        }
+        .alert-box {
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+            color: #721c24;
+        }
+        .type-badge {
+            display: inline-block;
+            padding: 8px 15px;
+            background-color: #2c5f8d;
+            color: white;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+        .info-box {
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+        }
+        .info-box h2 {
+            margin: 0 0 15px;
+            font-size: 18px;
+            color: #333;
+        }
+        .info-row {
+            display: flex;
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .info-row:last-child {
+            border-bottom: none;
+        }
+        .info-label {
+            font-weight: 600;
+            color: #555;
+            min-width: 140px;
+        }
+        .info-value {
+            color: #333;
+        }
+        .message-box {
+            background-color: #fff;
+            border: 2px solid #dee2e6;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 6px;
+            min-height: 60px;
+        }
+        .message-box h3 {
+            margin: 0 0 10px;
+            color: #333;
+            font-size: 16px;
+        }
+        .message-box p {
+            margin: 0;
+            color: #555;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+        .footer {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>🔔 Nová poptávka</h1>
+            <p>Formulář z webu</p>
+        </div>
+        
+        <div class="content">
+            <div class="alert-box">
+                <strong>⚠️ Nová poptávka vyžaduje vaši pozornost</strong>
+            </div>
+            
+            <div style="text-align: center;">
+                <span class="type-badge">{{typeLabel}}</span>
+            </div>
+            
+            {{#if itemName}}
+            <div style="text-align: center; margin: 15px 0;">
+                <p style="margin: 0; color: #666;">Zájem o:</p>
+                <p style="margin: 5px 0; font-size: 18px; font-weight: 600; color: #2c5f8d;">{{itemName}}</p>
+            </div>
+            {{/if}}
+            
+            <div class="info-box">
+                <h2>👤 Kontaktní údaje</h2>
+                <div class="info-row">
+                    <span class="info-label">Jméno:</span>
+                    <span class="info-value">{{name}}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Email:</span>
+                    <span class="info-value"><a href="mailto:{{email}}">{{email}}</a></span>
+                </div>
+                {{#if phone}}
+                <div class="info-row">
+                    <span class="info-label">Telefon:</span>
+                    <span class="info-value"><a href="tel:{{phone}}">{{phone}}</a></span>
+                </div>
+                {{/if}}
+                {{#if service}}
+                <div class="info-row">
+                    <span class="info-label">Služba:</span>
+                    <span class="info-value">{{service}}</span>
+                </div>
+                {{/if}}
+            </div>
+            
+            {{#if message}}
+            <div class="message-box">
+                <h3>💬 Zpráva od klienta:</h3>
+                <p>{{message}}</p>
+            </div>
+            {{/if}}
+            
+            <div style="background-color: #e7f3ff; padding: 15px; border-radius: 6px; margin: 25px 0;">
+                <p style="margin: 0; color: #004085;">
+                    <strong>⏰ Čas přijetí:</strong> {{timestamp}}
+                </p>
+            </div>
+            
+            <p style="margin-top: 30px; color: #dc3545; font-weight: 600; text-align: center;">
+                Doporučujeme odpovědět do 24 hodin!
+            </p>
+        </div>
+        
+        <div class="footer">
+            <p>Tento email byl automaticky vygenerován kontaktním formulářem na webu pricna.cz</p>
+            <p style="margin-top: 10px;">© 2025 Příčná Offices s.r.o.</p>
+        </div>
+    </div>
+</body>
+</html>

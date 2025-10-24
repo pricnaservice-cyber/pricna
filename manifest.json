@@ -1,0 +1,29 @@
+{
+  "name": "Příčná Offices & Apartments - Kanceláře a Byty Havířov",
+  "short_name": "Příčná Offices",
+  "description": "Moderní kanceláře a byty k pronájmu v Havířově",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#eabb11",
+  "icons": [
+    {
+      "src": "images/fav_icon_final.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/fav_icon_final.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "images/pricna_logo_final.png",
+      "sizes": "600x60",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

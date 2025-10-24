@@ -1,0 +1,22 @@
+name = "pricna-api"
+main = "server.js"
+compatibility_date = "2024-01-01"
+
+# Cloudflare Workers configuration
+[env.production]
+name = "pricna-api"
+workers_dev = false
+route = "https://api.pricna.cz/*"
+
+# Environment variables (set these in Cloudflare Dashboard)
+# PORT, MAILTRAP_*, EMAIL_*, JWT_SECRET, ADMIN_*, DATABASE_PATH, NODE_ENV, FRONTEND_URL, ADMIN_URL
+
+# KV Namespace for database (alternative to SQLite)
+# [[kv_namespaces]]
+# binding = "DB"
+# id = "your_kv_namespace_id"
+
+# Durable Objects for session management (optional)
+# [[durable_objects.bindings]]
+# name = "SESSIONS"
+# class_name = "SessionDurableObject"

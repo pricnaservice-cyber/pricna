@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Potvrzení rezervace</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f4;
+        }
+        .email-container {
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .header {
+            background: linear-gradient(135deg, #2c5f8d 0%, #1a3a54 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 600;
+        }
+        .header p {
+            margin: 10px 0 0;
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        .content {
+            padding: 40px 30px;
+        }
+        .greeting {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .info-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #2c5f8d;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 4px;
+        }
+        .info-box h2 {
+            margin: 0 0 15px;
+            font-size: 20px;
+            color: #2c5f8d;
+        }
+        .info-row {
+            display: flex;
+            padding: 8px 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        .info-row:last-child {
+            border-bottom: none;
+        }
+        .info-label {
+            font-weight: 600;
+            color: #555;
+            min-width: 120px;
+        }
+        .info-value {
+            color: #333;
+        }
+        .price-highlight {
+            background-color: #d4edda;
+            color: #155724;
+            font-size: 24px;
+            font-weight: bold;
+            padding: 15px;
+            text-align: center;
+            border-radius: 6px;
+            margin: 20px 0;
+        }
+        .important-note {
+            background-color: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 25px 0;
+        }
+        .important-note strong {
+            color: #856404;
+        }
+        .contact-info {
+            background-color: #e7f3ff;
+            padding: 20px;
+            border-radius: 6px;
+            margin: 25px 0;
+        }
+        .contact-info h3 {
+            margin: 0 0 10px;
+            color: #2c5f8d;
+            font-size: 18px;
+        }
+        .contact-info p {
+            margin: 5px 0;
+            color: #333;
+        }
+        .footer {
+            background-color: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+        }
+        .footer p {
+            margin: 5px 0;
+        }
+        .social-links {
+            margin: 15px 0;
+        }
+        .social-links a {
+            display: inline-block;
+            margin: 0 10px;
+            color: #2c5f8d;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <div class="header">
+            <h1>✓ Rezervace potvrzena</h1>
+            <p>Sdílené kanceláře Příčná</p>
+        </div>
+        
+        <div class="content">
+            <p class="greeting">Dobrý den {{name}},</p>
+            
+            <p>děkujeme za Vaši rezervaci sdílených kancelářských prostor. S radostí Vám potvrzujeme, že Vaše rezervace byla úspěšně přijata.</p>
+            
+            <div class="info-box">
+                <h2>Detaily rezervace</h2>
+                <div class="info-row">
+                    <span class="info-label">Datum:</span>
+                    <span class="info-value">{{date}}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Čas:</span>
+                    <span class="info-value">{{time}}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Doba trvání:</span>
+                    <span class="info-value">{{duration}}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Jméno:</span>
+                    <span class="info-value">{{name}}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Email:</span>
+                    <span class="info-value">{{email}}</span>
+                </div>
+                <div class="info-row">
+                    <span class="info-label">Telefon:</span>
+                    <span class="info-value">{{phone}}</span>
+                </div>
+                {{#if company}}
+                <div class="info-row">
+                    <span class="info-label">Společnost:</span>
+                    <span class="info-value">{{company}}</span>
+                </div>
+                {{/if}}
+            </div>
+            
+            <div class="price-highlight">
+                Celková cena: {{totalPrice}} Kč
+            </div>
+            
+            <div class="important-note">
+                <strong>Důležité informace:</strong>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    <li>Platbu provedete při příchodu na recepci</li>
+                    <li>Dostavte se prosím 5 minut před začátkem rezervace</li>
+                    <li>Při příchodu se nahlaste na recepci</li>
+                </ul>
+            </div>
+            
+            <div class="contact-info">
+                <h3>Kde nás najdete</h3>
+                <p><strong>📍 Adresa:</strong> Příčná 1, 736 01 Havířov - Město</p>
+                <p><strong>📞 Telefon:</strong> +420 608 429 100</p>
+                <p><strong>✉️ Email:</strong> rezervace@pricna.cz</p>
+                <p><strong>🕐 Otevírací doba:</strong> Po-Pá: 7:00 - 19:00</p>
+            </div>
+            
+            <p style="margin-top: 30px; color: #666;">Pokud máte jakékoli dotazy nebo potřebujete rezervaci změnit, neváhejte nás kontaktovat.</p>
+            
+            <p style="margin-top: 20px;">Těšíme se na Vaši návštěvu!</p>
+            
+            <p style="margin-top: 30px; color: #666; font-size: 14px;">
+                S pozdravem,<br>
+                <strong>Tým Příčná Offices</strong>
+            </p>
+        </div>
+        
+        <div class="footer">
+            <p><strong>Příčná Offices s.r.o.</strong></p>
+            <p>Příčná 1, 736 01 Havířov - Město</p>
+            <div class="social-links">
+                <a href="https://www.facebook.com/pricna">Facebook</a> |
+                <a href="https://www.instagram.com/pricna_havirov">Instagram</a>
+            </div>
+            <p style="margin-top: 15px; font-size: 12px; color: #999;">
+                © 2025 Příčná Offices s.r.o. Všechna práva vyhrazena.
+            </p>
+        </div>
+    </div>
+</body>
+</html>

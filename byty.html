@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Byty Havířov k Pronájmu | Moderní Bydlení | Příčná Apartments s.r.o.</title>
+    <meta name="description" content="Byty k pronájmu Havířov - moderní apartmány v centru města. Příčná Apartments s.r.o. nabízí kvalitní byty Havířov s výbornou dostupností. Pronájem bytů Havířov.">
+    <meta name="keywords" content="byty Havířov, pronájem bytů Havířov, byt Havířov, byty pronájem Havířov, bydlení Havířov, Příčná Havířov, Příčná Apartments s.r.o., moderní byty Havířov, apartmány Havířov">
+    <meta name="author" content="Příčná Apartments s.r.o.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.pricna-offices.cz/byty.html">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.pricna-offices.cz/byty.html">
+    <meta property="og:title" content="Byty Havířov k Pronájmu | Příčná Apartments s.r.o.">
+    <meta property="og:description" content="Moderní byty k pronájmu v Havířově. Kvalitní bydlení v centru města s výbornou dostupností.">
+    <meta property="og:image" content="https://www.pricna-offices.cz/images/pricna_logo_final.png">
+    
+    <!-- Favicons for all browsers and devices -->
+    <link rel="icon" type="image/png" sizes="32x32" href="images/fav_icon_final.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/fav_icon_final.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="images/fav_icon_final.png">
+    <link rel="shortcut icon" href="images/fav_icon_final.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "Byty k pronájmu",
+        "provider": {
+            "@type": "Organization",
+            "name": "Příčná Apartments s.r.o.",
+            "areaServed": "Havířov"
+        },
+        "areaServed": {
+            "@type": "City",
+            "name": "Havířov"
+        },
+        "description": "Moderní byty k pronájmu v Havířově"
+    }
+    </script>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="logo-container">
+                <a href="index.html" class="logo">
+                    <img src="images/pricna_logo_final.png" alt="Příčná Offices" class="logo-img">
+                </a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Domů</a></li>
+                    <li><a href="kancelare.html">Kanceláře</a></li>
+                    <li><a href="sdilene-kancelare.html">Sdílené Kanceláře</a></li>
+                    <li><a href="byty.html" class="active">Byty</a></li>
+                    <li><a href="kontakt.html">Kontakt</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay"></div>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Byty k dlouhodobému pronájmu</h1>
+            <p>Komfortní bydlení v Havířově</p>
+        </div>
+    </section>
+
+    <!-- Apartments Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-heading-styled">Dostupné byty</h2>
+            
+            <div class="apartments-grid">
+                <!-- Apartment 1 -->
+                <div class="apartment-card">
+                    <div class="apartment-img-placeholder">
+                        <img src="images/Byty/byt_11_kuchyne.JPG" alt="Byt 1+kk">
+                    </div>
+                    <div class="apartment-info">
+                        <h3>Byt 1+kk</h3>
+                        <p class="apartment-size"><i class="fas fa-ruler-combined"></i> 35 m²</p>
+                        <p class="apartment-location"><i class="fas fa-map-marker-alt"></i> Příčná, Havířov</p>
+                        <p class="apartment-price"><i class="fas fa-euro-sign"></i> 15 000 Kč/měsíc</p>
+                        <button class="btn btn-primary apartment-detail-btn" data-apartment="apt-1">Více informací</button>
+                    </div>
+                </div>
+
+                <!-- Apartment 2 -->
+                <div class="apartment-card">
+                    <div class="apartment-img-placeholder">
+                        <i class="fas fa-image"></i>
+                    </div>
+                    <div class="apartment-info">
+                        <h3>Byt 2+kk</h3>
+                        <p class="apartment-size"><i class="fas fa-ruler-combined"></i> 50 m²</p>
+                        <p class="apartment-location"><i class="fas fa-map-marker-alt"></i> Příčná, Havířov</p>
+                        <p class="apartment-price"><i class="fas fa-euro-sign"></i> 20 000 Kč/měsíc</p>
+                        <button class="btn btn-primary apartment-detail-btn" data-apartment="apt-2">Více informací</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Apartment Detail Modal -->
+    <div id="apartment-modal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div id="modal-body">
+                <!-- Content will be dynamically inserted -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer data-nosnippet>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-social">
+                    <h4>Sledujte nás</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/pricna" target="_blank" rel="noopener noreferrer" title="Facebook" class="social-icon">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://www.instagram.com/pricna_havirov" target="_blank" rel="noopener noreferrer" title="Instagram" class="social-icon">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" target="_blank" rel="noopener noreferrer" title="LinkedIn" class="social-icon">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Příčná Offices s.r.o. Všechna práva vyhrazena.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/script.js"></script>
+    <script src="js/apartments.js"></script>
+</body>
+</html>
