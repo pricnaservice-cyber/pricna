@@ -1,7 +1,5 @@
 # Cloudflare Pages redirects
 
 # Subdoména rezervace.pricna.cz → admin panel
+https://rezervace.pricna.cz/ /admin/index.html 200
 https://rezervace.pricna.cz/* /admin/:splat 200
-
-# API proxy (není potřeba, API je na separátní Workers URL)
-# /api/* https://pricna-api.pricna-service.workers.dev/api/:splat 200
