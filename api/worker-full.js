@@ -119,17 +119,35 @@ async function sendEmail(env, to, subject, html, from) {
 
 async function sendReservationEmails(reservation, env) {
   const confirmationHtml = `
-    <h2>✅ Potvrzení rezervace</h2>
-    <p>Dobrý den <strong>${reservation.name}</strong>,</p>
-    <p>Děkujeme za Vaši rezervaci sdílené kanceláře.</p>
-    <div style="background: #f3f4f6; padding: 20px; margin: 20px 0;">
-      <h3>📅 Detaily rezervace</h3>
-      <p><strong>Datum:</strong> ${reservation.date}</p>
-      <p><strong>Čas:</strong> ${reservation.time}</p>
-      <p><strong>Cena:</strong> ${reservation.totalPrice} Kč</p>
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+      <h2 style="color: #2c5f8d;">✅ Potvrzení rezervace</h2>
+      <p>Dobrý den <strong>${reservation.name}</strong>,</p>
+      <p>Děkujeme za Vaši rezervaci sdílené kanceláře.</p>
+      
+      <div style="background: #f3f4f6; padding: 20px; margin: 20px 0; border-radius: 8px;">
+        <h3 style="margin-top: 0;">📅 Detaily rezervace</h3>
+        <p><strong>Datum:</strong> ${reservation.date}</p>
+        <p><strong>Čas:</strong> ${reservation.time}</p>
+        <p><strong>Délka:</strong> ${reservation.duration} ${reservation.duration === 1 ? 'hodina' : 'hodiny'}</p>
+        <p><strong>Cena:</strong> ${reservation.totalPrice} Kč</p>
+      </div>
+      
+      <div style="background: #fff3cd; padding: 15px; margin: 20px 0; border-radius: 8px; border-left: 4px solid #ffc107;">
+        <h4 style="margin-top: 0;">ℹ️ Změna nebo zrušení rezervace</h4>
+        <p style="margin: 0;">Pro změnu nebo zrušení rezervace nás prosím kontaktujte telefonicky na čísle <strong>+420 608 429 100</strong>.</p>
+      </div>
+      
+      <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd;">
+        <p><strong>📍 Adresa:</strong> Příčná 1, 736 01 Havířov - Město</p>
+        <p><strong>📞 Telefon:</strong> +420 608 429 100</p>
+        <p><strong>🕐 Otevírací doba:</strong> Po-Pá: 7:00 - 19:00</p>
+      </div>
+      
+      <p style="margin-top: 30px; color: #666; font-size: 14px;">
+        Těšíme se na Vaši návštěvu!<br>
+        <strong>Tým Příčná Offices</strong>
+      </p>
     </div>
-    <p><strong>📍 Adresa:</strong> Příčná 1, 736 01 Havířov</p>
-    <p><strong>📞 Telefon:</strong> +420 608 429 100</p>
   `;
   
   await sendEmail(env, reservation.email, 'Potvrzení rezervace - Příčná Offices', confirmationHtml, env.EMAIL_RESERVATIONS);
@@ -145,6 +163,33 @@ async function sendReservationEmails(reservation, env) {
   `;
   
   await sendEmail(env, [env.EMAIL_RESERVATIONS, env.EMAIL_OWNER], `Nová rezervace #${reservation.id}`, notificationHtml, env.EMAIL_RESERVATIONS);
+}
+
+async function sendCancellationEmail(reservation, env) {
+  const cancellationHtml = `
+    <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+      <h2 style="color: #dc3545;">❌ Zrušení rezervace</h2>
+      <p>Dobrý den <strong>${reservation.name}</strong>,</p>
+      <p>Vaše rezervace sdílené kanceláře byla zrušena.</p>
+      
+      <div style="background: #f8d7da; padding: 20px; margin: 20px 0; border-radius: 8px; border-left: 4px solid #dc3545;">
+        <h3 style="margin-top: 0;">📅 Zrušená rezervace</h3>
+        <p><strong>Datum:</strong> ${reservation.date}</p>
+        <p><strong>Čas:</strong> ${reservation.time}</p>
+        <p><strong>Cena:</strong> ${reservation.totalPrice} Kč</p>
+      </div>
+      
+      <p>Pokud jste tuto rezervaci nezrušili Vy, nebo máte dotazy, kontaktujte nás prosím na:</p>
+      <p><strong>📞 Telefon:</strong> +420 608 429 100</p>
+      
+      <p style="margin-top: 30px; color: #666; font-size: 14px;">
+        Budeme se těšit na Vaši další návštěvu!<br>
+        <strong>Tým Příčná Offices</strong>
+      </p>
+    </div>
+  `;
+  
+  await sendEmail(env, reservation.email, 'Zrušení rezervace - Příčná Offices', cancellationHtml, env.EMAIL_RESERVATIONS);
 }
 
 async function sendInquiryEmails(inquiry, env) {
@@ -266,6 +311,30 @@ export default {
         
         const { results } = await env.DB.prepare('SELECT * FROM reservations WHERE id = ?').bind(id).all();
         return jsonResponse({ success: true, reservation: results[0] });
+      }
+      
+      if (path.match(/^\/api\/reservations\/\d+\/cancel$/) && method === 'POST') {
+        const user = await requireAuth(request, env);
+        if (!user) return errorResponse('Unauthorized', 401);
+        
+        const id = path.split('/')[3];
+        
+        // Get reservation details before cancelling
+        const { results } = await env.DB.prepare('SELECT * FROM reservations WHERE id = ?').bind(id).all();
+        const reservation = results[0];
+        
+        if (!reservation) {
+          return errorResponse('Reservation not found', 404);
+        }
+        
+        // Update status to cancelled
+        await env.DB.prepare('UPDATE reservations SET status = ? WHERE id = ?')
+          .bind('cancelled', id).run();
+        
+        // Send cancellation email
+        ctx.waitUntil(sendCancellationEmail(reservation, env));
+        
+        return jsonResponse({ success: true, message: 'Reservation cancelled' });
       }
       
       if (path.match(/^\/api\/reservations\/\d+$/) && method === 'DELETE') {

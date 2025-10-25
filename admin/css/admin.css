@@ -920,6 +920,17 @@ body {
     color: #ddd;
 }
 
+/* Modal - wider and better spacing */
+.modal-content {
+    max-width: 800px !important;
+    padding: 30px !important;
+}
+
+.modal-header {
+    margin-bottom: 30px !important;
+    padding-bottom: 20px !important;
+}
+
 /* Modal Time Slots Selection */
 .time-slots-grid {
     display: grid;
@@ -953,34 +964,40 @@ body {
 /* Detail Grid */
 .detail-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
     padding: 20px 0;
 }
 
 .detail-item {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 10px;
 }
 
 .detail-item label {
     font-weight: bold;
     color: #666;
-    font-size: 14px;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .detail-item span {
-    font-size: 16px;
+    font-size: 18px;
     color: var(--text-color);
+}
+
+.detail-item.full-width {
+    grid-column: 1 / -1;
 }
 
 .status-badge {
     display: inline-block;
-    padding: 8px 16px;
-    border-radius: 6px;
+    padding: 10px 20px;
+    border-radius: 8px;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 /* Responsive */

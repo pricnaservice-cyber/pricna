@@ -13,6 +13,64 @@ const TIME_SLOTS = [
     '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'
 ];
 
+// === ČESKÉ STÁTNÍ SVÁTKY ===
+function calculateEaster(year) {
+    const a = year % 19;
+    const b = Math.floor(year / 100);
+    const c = year % 100;
+    const d = Math.floor(b / 4);
+    const e = b % 4;
+    const f = Math.floor((b + 8) / 25);
+    const g = Math.floor((b - f + 1) / 3);
+    const h = (19 * a + b - d - g + 15) % 30;
+    const i = Math.floor(c / 4);
+    const k = c % 4;
+    const l = (32 + 2 * e + 2 * i - h - k) % 7;
+    const m = Math.floor((a + 11 * h + 22 * l) / 451);
+    const month = Math.floor((h + l - 7 * m + 114) / 31);
+    const day = ((h + l - 7 * m + 114) % 31) + 1;
+    return new Date(year, month - 1, day);
+}
+
+function getCzechHolidays(year) {
+    const holidays = [];
+    const easter = calculateEaster(year);
+    
+    holidays.push(`${year}-01-01`); // Nový rok
+    holidays.push(`${year}-05-01`); // Svátek práce
+    holidays.push(`${year}-05-08`); // Den vítězství
+    holidays.push(`${year}-07-05`); // Cyril a Metoděj
+    holidays.push(`${year}-07-06`); // Jan Hus
+    holidays.push(`${year}-09-28`); // Den české státnosti
+    holidays.push(`${year}-10-28`); // Den vzniku Československa
+    holidays.push(`${year}-11-17`); // Den boje za svobodu a demokracii
+    holidays.push(`${year}-12-24`); // Štědrý den
+    holidays.push(`${year}-12-25`); // 1. svátek vánoční
+    holidays.push(`${year}-12-26`); // 2. svátek vánoční
+    
+    const goodFriday = new Date(easter);
+    goodFriday.setDate(easter.getDate() - 2);
+    holidays.push(goodFriday.toISOString().split('T')[0]);
+    
+    const easterMonday = new Date(easter);
+    easterMonday.setDate(easter.getDate() + 1);
+    holidays.push(easterMonday.toISOString().split('T')[0]);
+    
+    return holidays;
+}
+
+const currentYear = new Date().getFullYear();
+const czechHolidays = [
+    ...getCzechHolidays(currentYear),
+    ...getCzechHolidays(currentYear + 1),
+    ...getCzechHolidays(currentYear + 2)
+];
+
+function isHoliday(date) {
+    const dateStr = formatDate(date);
+    return czechHolidays.includes(dateStr);
+}
+
 // Czech month/day names
 const MONTH_NAMES = [
     'Leden', 'Únor', 'Březen', 'Duben', 'Květen', 'Červen',
@@ -223,6 +281,7 @@ function renderTimeSlots() {
     
     const dayOfWeek = currentDate.getDay();
     const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+    const holiday = isHoliday(currentDate);
     
     if (isWeekend) {
         container.innerHTML = `
@@ -230,6 +289,17 @@ function renderTimeSlots() {
                 <i class="fas fa-times-circle"></i>
                 <h3>Zavřeno</h3>
                 <p>O víkendech nemáme otevřeno</p>
+            </div>
+        `;
+        return;
+    }
+    
+    if (holiday) {
+        container.innerHTML = `
+            <div class="closed-message">
+                <i class="fas fa-calendar-times"></i>
+                <h3>Státní svátek</h3>
+                <p>Dnes máme zavřeno</p>
             </div>
         `;
         return;
@@ -317,54 +387,67 @@ function showReservationDetail(reservation) {
     content.innerHTML = `
         <div class="detail-grid">
             <div class="detail-item">
-                <label>Datum:</label>
-                <span>${reservation.date}</span>
+                <label>📅 Datum:</label>
+                <span>${formatDateCzech(reservation.date)}</span>
             </div>
             <div class="detail-item">
-                <label>Čas:</label>
-                <span>${reservation.time} (${reservation.duration}h)</span>
+                <label>🕐 Čas:</label>
+                <span>${reservation.time}</span>
             </div>
             <div class="detail-item">
-                <label>Jméno:</label>
+                <label>⏱️ Délka:</label>
+                <span>${reservation.duration} ${reservation.duration === 1 ? 'hodina' : reservation.duration < 5 ? 'hodiny' : 'hodin'}</span>
+            </div>
+            <div class="detail-item">
+                <label>💰 Cena:</label>
+                <span><strong>${reservation.totalPrice} Kč</strong></span>
+            </div>
+            <div class="detail-item full-width">
+                <label>👤 Jméno a příjmení:</label>
                 <span>${reservation.name}</span>
             </div>
             <div class="detail-item">
-                <label>Email:</label>
+                <label>📧 Email:</label>
                 <span>${reservation.email}</span>
             </div>
             <div class="detail-item">
-                <label>Telefon:</label>
+                <label>📞 Telefon:</label>
                 <span>${reservation.phone || '-'}</span>
             </div>
-            <div class="detail-item">
-                <label>Společnost:</label>
+            <div class="detail-item full-width">
+                <label>🏢 Společnost:</label>
                 <span>${reservation.company || '-'}</span>
             </div>
-            <div class="detail-item">
-                <label>Poznámka:</label>
+            <div class="detail-item full-width">
+                <label>💬 Poznámka:</label>
                 <span>${reservation.message || '-'}</span>
             </div>
-            <div class="detail-item">
-                <label>Cena:</label>
-                <span><strong>${reservation.totalPrice} Kč</strong></span>
-            </div>
-            <div class="detail-item">
+            <div class="detail-item full-width">
                 <label>Status:</label>
                 <span class="status-badge status-${reservation.status}">
-                    ${reservation.status === 'pending' ? 'Čeká na potvrzení' : 
-                      reservation.status === 'confirmed' ? 'Potvrzeno' : 'Zrušeno'}
+                    ${reservation.status === 'pending' ? '⏳ Čeká na potvrzení' : 
+                      reservation.status === 'confirmed' ? '✅ Potvrzeno' : '❌ Zrušeno'}
                 </span>
             </div>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-danger" onclick="deleteReservation(${reservation.id})">
-                <i class="fas fa-trash"></i> Smazat
+            <button class="btn btn-danger" onclick="cancelReservation(${reservation.id})">
+                <i class="fas fa-times-circle"></i> Zrušit rezervaci
             </button>
             <button class="btn btn-secondary modal-close">Zavřít</button>
         </div>
     `;
     
     modal.style.display = 'flex';
+}
+
+function formatDateCzech(dateStr) {
+    const date = new Date(dateStr);
+    const day = date.getDate();
+    const month = MONTH_NAMES[date.getMonth()];
+    const year = date.getFullYear();
+    const dayName = DAY_NAMES[date.getDay()];
+    return `${dayName}, ${day}. ${month} ${year}`;
 }
 
 function showCreateModal() {
@@ -453,8 +536,32 @@ async function handleCreateReservation(e) {
     }
 }
 
+async function cancelReservation(id) {
+    if (!confirm('Opravdu chcete zrušit tuto rezervaci? Klient obdrží email o zrušení.')) return;
+    
+    try {
+        const response = await fetch(`${API_URL}/reservations/${id}/cancel`, {
+            method: 'POST',
+            headers: { 
+                'Authorization': `Bearer ${authToken}`,
+                'Content-Type': 'application/json'
+            }
+        });
+        
+        if (response.ok) {
+            document.getElementById('detail-modal').style.display = 'none';
+            await loadDayView();
+            alert('Rezervace byla zrušena a klient byl informován emailem.');
+        } else {
+            alert('Chyba při rušení rezervace');
+        }
+    } catch (error) {
+        alert('Chyba připojení k serveru');
+    }
+}
+
 async function deleteReservation(id) {
-    if (!confirm('Opravdu chcete smazat tuto rezervaci?')) return;
+    if (!confirm('Opravdu chcete SMAZAT tuto rezervaci? Tato akce je nevratná!')) return;
     
     try {
         const response = await fetch(`${API_URL}/reservations/${id}`, {
@@ -482,4 +589,5 @@ function formatDate(date) {
 
 // Make functions available globally for onclick handlers
 window.showReservationDetail = showReservationDetail;
+window.cancelReservation = cancelReservation;
 window.deleteReservation = deleteReservation;
