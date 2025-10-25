@@ -879,12 +879,7 @@ body {
     font-weight: bold;
 }
 
-.status-pending {
-    background: #fff3cd;
-    color: #856404;
-}
-
-.status-confirmed {
+.status-active {
     background: #d4edda;
     color: #155724;
 }

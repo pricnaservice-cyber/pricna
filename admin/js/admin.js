@@ -115,6 +115,20 @@ function setupEventListeners() {
         loadDayView();
     });
     
+    // Date picker
+    const pickDateBtn = document.getElementById('pick-date-btn');
+    const datePickerInput = document.getElementById('date-picker-input');
+    if (pickDateBtn && datePickerInput) {
+        pickDateBtn.addEventListener('click', () => {
+            datePickerInput.click();
+        });
+        datePickerInput.addEventListener('change', (e) => {
+            const selectedDate = new Date(e.target.value + 'T12:00:00');
+            currentDate = selectedDate;
+            loadDayView();
+        });
+    }
+    
     // Create reservation button
     const createBtn = document.getElementById('create-reservation-btn');
     if (createBtn) {
@@ -266,7 +280,9 @@ function getReservationsForDate(date) {
 
 function isTimeSlotReserved(timeSlot) {
     const reservations = getReservationsForDate(currentDate);
+    // Pouze aktivní rezervace blokují sloty
     return reservations.some(r => {
+        if (r.status === 'cancelled') return false;
         const times = r.time.split(', ');
         return times.includes(timeSlot);
     });
@@ -331,6 +347,7 @@ function renderTimeSlots() {
 function getReservationForTimeSlot(timeSlot) {
     const reservations = getReservationsForDate(currentDate);
     return reservations.find(r => {
+        if (r.status === 'cancelled') return false;
         const times = r.time.split(', ');
         return times.includes(timeSlot);
     });
@@ -365,8 +382,8 @@ function renderDayReservations() {
                 <div class="reservation-time">
                     <i class="fas fa-clock"></i> ${r.time}
                 </div>
-                <div class="reservation-status status-${r.status}">
-                    ${r.status === 'pending' ? 'Čeká' : r.status === 'confirmed' ? 'Potvrzeno' : 'Zrušeno'}
+                <div class="reservation-status ${r.status === 'cancelled' ? 'status-cancelled' : 'status-active'}">
+                    ${r.status === 'cancelled' ? 'Zrušeno' : 'Aktivní'}
                 </div>
             </div>
             <div class="reservation-info">
@@ -424,17 +441,20 @@ function showReservationDetail(reservation) {
             </div>
             <div class="detail-item full-width">
                 <label>Status:</label>
-                <span class="status-badge status-${reservation.status}">
-                    ${reservation.status === 'pending' ? '⏳ Čeká na potvrzení' : 
-                      reservation.status === 'confirmed' ? '✅ Potvrzeno' : '❌ Zrušeno'}
+                <span class="status-badge ${reservation.status === 'cancelled' ? 'status-cancelled' : 'status-active'}">
+                    ${reservation.status === 'cancelled' ? '❌ Zrušeno' : '✅ Aktivní'}
                 </span>
             </div>
         </div>
         <div class="modal-footer">
-            <button class="btn btn-danger" onclick="cancelReservation(${reservation.id})">
-                <i class="fas fa-times-circle"></i> Zrušit rezervaci
-            </button>
-            <button class="btn btn-secondary modal-close">Zavřít</button>
+            ${reservation.status === 'cancelled' 
+                ? `<button class="btn btn-danger" onclick="deleteReservation(${reservation.id})">
+                     <i class="fas fa-trash"></i> Smazat rezervaci
+                   </button>`
+                : `<button class="btn btn-danger" onclick="cancelReservation(${reservation.id})">
+                     <i class="fas fa-times-circle"></i> Zrušit rezervaci
+                   </button>`
+            }
         </div>
     `;
     
@@ -517,8 +537,7 @@ async function handleCreateReservation(e) {
         const response = await fetch(`${API_URL}/reservations`, {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${authToken}`
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(formData)
         });
@@ -526,7 +545,11 @@ async function handleCreateReservation(e) {
         if (response.ok) {
             document.getElementById('create-modal').style.display = 'none';
             e.target.reset();
-            await loadDayView();
+            // Force reload reservations from server
+            allReservations = [];
+            await loadReservations();
+            renderTimeSlots();
+            renderDayReservations();
             alert('Rezervace byla úspěšně vytvořena!');
         } else {
             alert('Chyba při vytváření rezervace');
@@ -550,7 +573,11 @@ async function cancelReservation(id) {
         
         if (response.ok) {
             document.getElementById('detail-modal').style.display = 'none';
-            await loadDayView();
+            // Force reload reservations from server
+            allReservations = [];
+            await loadReservations();
+            renderTimeSlots();
+            renderDayReservations();
             alert('Rezervace byla zrušena a klient byl informován emailem.');
         } else {
             alert('Chyba při rušení rezervace');

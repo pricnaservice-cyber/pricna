@@ -132,13 +132,18 @@ async function sendReservationEmails(reservation, env) {
         <p><strong>Cena:</strong> ${reservation.totalPrice} Kč</p>
       </div>
       
+      <div style="background: #e3f2fd; padding: 15px; margin: 20px 0; border-radius: 8px; border-left: 4px solid #2196f3;">
+        <h4 style="margin-top: 0;">💰 Platba a klíče</h4>
+        <p style="margin: 0;">Platbu a vyzvednutí klíčů od kanceláře prosím proveďte na recepci na adrese <strong>Příčná 1, 736 01 Havířov - Město</strong>.</p>
+      </div>
+      
       <div style="background: #fff3cd; padding: 15px; margin: 20px 0; border-radius: 8px; border-left: 4px solid #ffc107;">
         <h4 style="margin-top: 0;">ℹ️ Změna nebo zrušení rezervace</h4>
         <p style="margin: 0;">Pro změnu nebo zrušení rezervace nás prosím kontaktujte telefonicky na čísle <strong>+420 608 429 100</strong>.</p>
       </div>
       
       <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd;">
-        <p><strong>📍 Adresa:</strong> Příčná 1, 736 01 Havířov - Město</p>
+        <p><strong>📍 Adresa recepce:</strong> Příčná 1, 736 01 Havířov - Město</p>
         <p><strong>📞 Telefon:</strong> +420 608 429 100</p>
         <p><strong>🕐 Otevírací doba:</strong> Po-Pá: 7:00 - 19:00</p>
       </div>

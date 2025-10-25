@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recepce - Rezervační systém | Příčná Offices</title>
+    <link rel="icon" type="image/png" href="../images/logo.png">
     <link rel="stylesheet" href="css/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
@@ -73,6 +74,12 @@
                     <button id="today-btn" class="btn btn-outline">
                         <i class="fas fa-calendar-day"></i> Dnes
                     </button>
+                    <div class="date-picker-wrapper">
+                        <button id="pick-date-btn" class="btn btn-outline">
+                            <i class="fas fa-calendar-alt"></i> Vybrat datum
+                        </button>
+                        <input type="date" id="date-picker-input" style="display: none;">
+                    </div>
                     <button id="create-reservation-btn" class="btn btn-primary">
                         <i class="fas fa-plus"></i> Nová rezervace
                     </button>
