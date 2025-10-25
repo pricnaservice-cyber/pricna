@@ -1,5 +1,2 @@
 # Cloudflare Pages redirects
-
-# Subdoména rezervace.pricna.cz → admin panel
-https://rezervace.pricna.cz/ /admin/index.html 200
-https://rezervace.pricna.cz/* /admin/:splat 200
+# Routing pro subdomény je řešen přes functions/_middleware.js
