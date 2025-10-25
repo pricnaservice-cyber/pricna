@@ -180,35 +180,61 @@ document.addEventListener('DOMContentLoaded', function() {
     const PRICE_FULL_DAY = 399; // 4+ hours
     const FULL_DAY_THRESHOLD = 4;
 
-    // Czech holidays 2025 (add more years as needed)
+    // Automatické generování českých státních svátků
+    function calculateEaster(year) {
+        // Gaussův algoritmus pro výpočet Velikonoc
+        const a = year % 19;
+        const b = Math.floor(year / 100);
+        const c = year % 100;
+        const d = Math.floor(b / 4);
+        const e = b % 4;
+        const f = Math.floor((b + 8) / 25);
+        const g = Math.floor((b - f + 1) / 3);
+        const h = (19 * a + b - d - g + 15) % 30;
+        const i = Math.floor(c / 4);
+        const k = c % 4;
+        const l = (32 + 2 * e + 2 * i - h - k) % 7;
+        const m = Math.floor((a + 11 * h + 22 * l) / 451);
+        const month = Math.floor((h + l - 7 * m + 114) / 31);
+        const day = ((h + l - 7 * m + 114) % 31) + 1;
+        return new Date(year, month - 1, day);
+    }
+    
+    function getCzechHolidays(year) {
+        const holidays = [];
+        const easter = calculateEaster(year);
+        
+        // Fixní svátky
+        holidays.push(`${year}-01-01`); // Nový rok
+        holidays.push(`${year}-05-01`); // Svátek práce
+        holidays.push(`${year}-05-08`); // Den vítězství
+        holidays.push(`${year}-07-05`); // Cyril a Metoděj
+        holidays.push(`${year}-07-06`); // Jan Hus
+        holidays.push(`${year}-09-28`); // Den české státnosti
+        holidays.push(`${year}-10-28`); // Den vzniku Československa
+        holidays.push(`${year}-11-17`); // Den boje za svobodu a demokracii
+        holidays.push(`${year}-12-24`); // Štědrý den
+        holidays.push(`${year}-12-25`); // 1. svátek vánoční
+        holidays.push(`${year}-12-26`); // 2. svátek vánoční
+        
+        // Pohyblivé svátky (Velikonoce)
+        const goodFriday = new Date(easter);
+        goodFriday.setDate(easter.getDate() - 2);
+        holidays.push(goodFriday.toISOString().split('T')[0]); // Velký pátek
+        
+        const easterMonday = new Date(easter);
+        easterMonday.setDate(easter.getDate() + 1);
+        holidays.push(easterMonday.toISOString().split('T')[0]); // Velikonoční pondělí
+        
+        return holidays;
+    }
+    
+    // Generování svátků pro aktuální a příští 2 roky
+    const currentYear = new Date().getFullYear();
     const czechHolidays = [
-        '2025-01-01', // Nový rok
-        '2025-04-18', // Velký pátek
-        '2025-04-21', // Velikonoční pondělí
-        '2025-05-01', // Svátek práce
-        '2025-05-08', // Den vítězství
-        '2025-07-05', // Den slovanských věrozvěstů Cyrila a Metoděje
-        '2025-07-06', // Den upálení mistra Jana Husa
-        '2025-09-28', // Den české státnosti
-        '2025-10-28', // Den vzniku samostatného československého státu
-        '2025-11-17', // Den boje za svobodu a demokracii
-        '2025-12-24', // Štědrý den
-        '2025-12-25', // 1. svátek vánoční
-        '2025-12-26', // 2. svátek vánoční
-        // 2026
-        '2026-01-01',
-        '2026-04-03',
-        '2026-04-06',
-        '2026-05-01',
-        '2026-05-08',
-        '2026-07-05',
-        '2026-07-06',
-        '2026-09-28',
-        '2026-10-28',
-        '2026-11-17',
-        '2026-12-24',
-        '2026-12-25',
-        '2026-12-26'
+        ...getCzechHolidays(currentYear),
+        ...getCzechHolidays(currentYear + 1),
+        ...getCzechHolidays(currentYear + 2)
     ];
 
     let currentDate = new Date();

@@ -675,3 +675,337 @@ body {
         flex: 1;
     }
 }
+
+/* === NEW ADMIN DESIGN - DAY VIEW === */
+
+/* Day Navigation */
+.day-navigation {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.current-day-info {
+    text-align: center;
+    flex: 1;
+}
+
+.current-day-info h2 {
+    font-size: 32px;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+}
+
+.current-day-info p {
+    font-size: 18px;
+    color: #666;
+}
+
+/* Quick Actions */
+.quick-actions {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 30px;
+    justify-content: flex-end;
+}
+
+.btn-outline {
+    background: white;
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+}
+
+.btn-outline:hover {
+    background: var(--primary-color);
+    color: white;
+}
+
+/* Time Slots Grid */
+.admin-time-slots {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px;
+    padding: 20px 0;
+}
+
+.time-slot {
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.time-slot.available {
+    border-color: var(--success-color);
+    background: #f0fff4;
+}
+
+.time-slot.reserved {
+    border-color: var(--primary-color);
+    background: #e3f2fd;
+    cursor: pointer;
+}
+
+.time-slot.reserved:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.time-slot-time {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-bottom: 8px;
+}
+
+.time-slot-status {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.time-slot-status i {
+    margin-right: 6px;
+}
+
+.time-slot-info {
+    font-size: 12px;
+    color: #999;
+    margin-top: 8px;
+    padding-top: 8px;
+    border-top: 1px solid #ddd;
+}
+
+.closed-message {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+}
+
+.closed-message i {
+    font-size: 64px;
+    margin-bottom: 20px;
+    color: #ddd;
+}
+
+.closed-message h3 {
+    font-size: 24px;
+    margin-bottom: 8px;
+}
+
+/* Legend */
+.legend {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 2px solid;
+}
+
+.legend-color.available {
+    background: #f0fff4;
+    border-color: var(--success-color);
+}
+
+.legend-color.reserved {
+    background: #e3f2fd;
+    border-color: var(--primary-color);
+}
+
+/* Day Stats */
+.day-stats {
+    font-size: 14px;
+    color: #666;
+    background: var(--light-gray);
+    padding: 8px 16px;
+    border-radius: 8px;
+}
+
+/* Reservation Cards */
+.reservation-card {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.reservation-card:hover {
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.reservation-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.reservation-time {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--primary-color);
+}
+
+.reservation-status {
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.status-pending {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.status-confirmed {
+    background: #d4edda;
+    color: #155724;
+}
+
+.status-cancelled {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.reservation-info {
+    display: grid;
+    gap: 8px;
+    font-size: 14px;
+    color: #666;
+}
+
+.reservation-info i {
+    margin-right: 8px;
+    width: 16px;
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #999;
+}
+
+.empty-state i {
+    font-size: 64px;
+    margin-bottom: 20px;
+    color: #ddd;
+}
+
+/* Modal Time Slots Selection */
+.time-slots-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    gap: 12px;
+    margin: 16px 0;
+}
+
+.time-slot-btn {
+    padding: 12px;
+    border: 2px solid #ddd;
+    background: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.time-slot-btn:hover {
+    border-color: var(--primary-color);
+    background: #f0f8ff;
+}
+
+.time-slot-btn.selected {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+/* Detail Grid */
+.detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 20px 0;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.detail-item label {
+    font-weight: bold;
+    color: #666;
+    font-size: 14px;
+}
+
+.detail-item span {
+    font-size: 16px;
+    color: var(--text-color);
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .day-navigation {
+        padding: 20px;
+    }
+    
+    .current-day-info h2 {
+        font-size: 24px;
+    }
+    
+    .current-day-info p {
+        font-size: 16px;
+    }
+    
+    .admin-time-slots {
+        grid-template-columns: 1fr;
+    }
+    
+    .quick-actions {
+        flex-direction: column;
+    }
+    
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+}
