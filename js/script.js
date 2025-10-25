@@ -198,11 +198,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const PRICE_PER_HOUR = 99;
     const PRICE_FULL_DAY = 399; // 4+ hours
     const FULL_DAY_THRESHOLD = 4;
-    
-    // Initialize calendar on page load
-    if (calendarGrid) {
-        initCalendar();
-    }
 
     // Automatické generování českých státních svátků
     function calculateEaster(year) {

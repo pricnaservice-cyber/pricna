@@ -714,6 +714,16 @@ body {
     justify-content: flex-end;
 }
 
+.date-picker-wrapper {
+    position: relative;
+}
+
+.date-picker-wrapper input[type="date"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
 .btn-outline {
     background: white;
     color: var(--primary-color);
@@ -954,6 +964,18 @@ body {
     background: var(--primary-color);
     color: white;
     border-color: var(--primary-color);
+}
+
+.time-slot-btn.booked {
+    background: #f5f5f5;
+    border-color: #ddd;
+    color: #999;
+    cursor: not-allowed;
+}
+
+.time-slot-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 /* Detail Grid */

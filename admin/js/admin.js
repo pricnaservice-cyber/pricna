@@ -119,13 +119,16 @@ function setupEventListeners() {
     const pickDateBtn = document.getElementById('pick-date-btn');
     const datePickerInput = document.getElementById('date-picker-input');
     if (pickDateBtn && datePickerInput) {
-        pickDateBtn.addEventListener('click', () => {
-            datePickerInput.click();
+        pickDateBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            datePickerInput.showPicker ? datePickerInput.showPicker() : datePickerInput.click();
         });
         datePickerInput.addEventListener('change', (e) => {
-            const selectedDate = new Date(e.target.value + 'T12:00:00');
-            currentDate = selectedDate;
-            loadDayView();
+            if (e.target.value) {
+                const selectedDate = new Date(e.target.value + 'T12:00:00');
+                currentDate = selectedDate;
+                loadDayView();
+            }
         });
     }
     
@@ -478,29 +481,64 @@ function showCreateModal() {
     dateInput.value = formatDate(currentDate);
     dateInput.min = formatDate(new Date());
     
+    // Add event listener for date change
+    dateInput.removeEventListener('change', renderModalTimeSlots); // Remove old listener
+    dateInput.addEventListener('change', renderModalTimeSlots);
+    
     modal.style.display = 'flex';
     renderModalTimeSlots();
 }
 
 function renderModalTimeSlots() {
+    const date = document.getElementById('res-date').value;
     const container = document.getElementById('modal-time-slots');
-    if (!container) return;
     
-    container.innerHTML = TIME_SLOTS.map(slot => `
-        <button type="button" class="time-slot-btn" data-slot="${slot}">
-            ${slot}
-        </button>
-    `).join('');
+    if (!date) {
+        container.innerHTML = '<p>Nejprve vyberte datum</p>';
+        return;
+    }
     
-    container.querySelectorAll('.time-slot-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            this.classList.toggle('selected');
-            calculatePrice();
-        });
+    // Get reservations for selected date
+    const selectedDate = new Date(date + 'T12:00:00');
+    const dateReservations = allReservations.filter(r => {
+        return r.date === date && r.status !== 'cancelled';
+    });
+    
+    // Get booked times
+    const bookedTimes = [];
+    dateReservations.forEach(r => {
+        const times = r.time.split(', ');
+        bookedTimes.push(...times);
+    });
+    
+    container.innerHTML = '';
+    
+    TIME_SLOTS.forEach(slot => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'time-slot-btn';
+        btn.textContent = slot;
+        btn.dataset.slot = slot;
+        
+        // Check if slot is already booked
+        if (bookedTimes.includes(slot)) {
+            btn.classList.add('booked');
+            btn.disabled = true;
+            btn.style.opacity = '0.5';
+            btn.style.cursor = 'not-allowed';
+            btn.title = 'Již rezervováno';
+        } else {
+            btn.addEventListener('click', function() {
+                this.classList.toggle('selected');
+                updateModalPrice();
+            });
+        }
+        
+        container.appendChild(btn);
     });
 }
 
-function calculatePrice() {
+function updateModalPrice() {
     const selectedSlots = document.querySelectorAll('.time-slot-btn.selected').length;
     const priceInput = document.getElementById('res-price');
     
