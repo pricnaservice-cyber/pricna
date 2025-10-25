@@ -168,28 +168,24 @@ document.addEventListener('DOMContentLoaded', function() {
     // Load reservations from API
     async function loadReservations() {
         try {
-            const response = await fetch('https://pricna-api.pricna-service.workers.dev/api/reservations');
+            const response = await fetch('https://pricna-api.pricna-service.workers.dev/api/reservations/public');
             if (response.ok) {
                 allReservations = await response.json();
                 console.log('✅ Loaded reservations:', allReservations.length, 'total');
                 
-                // Build bookedSlots from reservations (only active ones)
+                // Build bookedSlots from reservations (only active ones - cancelled are already filtered by API)
                 bookedSlots = {};
-                let activeCount = 0;
                 allReservations.forEach(reservation => {
-                    if (reservation.status !== 'cancelled') {
-                        activeCount++;
-                        const times = reservation.time.split(', ');
-                        if (!bookedSlots[reservation.date]) {
-                            bookedSlots[reservation.date] = [];
-                        }
-                        bookedSlots[reservation.date].push(...times);
+                    const times = reservation.time.split(', ');
+                    if (!bookedSlots[reservation.date]) {
+                        bookedSlots[reservation.date] = [];
                     }
+                    bookedSlots[reservation.date].push(...times);
                 });
-                console.log('✅ Active reservations:', activeCount);
+                console.log('✅ Active reservations:', allReservations.length);
                 console.log('✅ Booked slots by date:', bookedSlots);
             } else {
-                console.error('❌ Failed to load reservations:', response.status);
+                console.error('❌ Failed to load reservations:', response.status, response.statusText);
             }
         } catch (error) {
             console.error('❌ Error loading reservations:', error);

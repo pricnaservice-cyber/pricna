@@ -268,6 +268,13 @@ export default {
       }
       
       // === RESERVATIONS ===
+      // Public endpoint for frontend calendar (no auth required)
+      if (path === '/api/reservations/public' && method === 'GET') {
+        const { results } = await env.DB.prepare('SELECT id, date, time, duration, status FROM reservations WHERE status != ? ORDER BY date ASC').bind('cancelled').all();
+        return jsonResponse(results);
+      }
+      
+      // Admin endpoint (auth required)
       if (path === '/api/reservations' && method === 'GET') {
         const user = await requireAuth(request, env);
         if (!user) return errorResponse('Unauthorized', 401);
