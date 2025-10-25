@@ -171,10 +171,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const response = await fetch('https://pricna-api.pricna-service.workers.dev/api/reservations');
             if (response.ok) {
                 allReservations = await response.json();
+                console.log('✅ Loaded reservations:', allReservations.length, 'total');
+                
                 // Build bookedSlots from reservations (only active ones)
                 bookedSlots = {};
+                let activeCount = 0;
                 allReservations.forEach(reservation => {
                     if (reservation.status !== 'cancelled') {
+                        activeCount++;
                         const times = reservation.time.split(', ');
                         if (!bookedSlots[reservation.date]) {
                             bookedSlots[reservation.date] = [];
@@ -182,9 +186,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         bookedSlots[reservation.date].push(...times);
                     }
                 });
+                console.log('✅ Active reservations:', activeCount);
+                console.log('✅ Booked slots by date:', bookedSlots);
+            } else {
+                console.error('❌ Failed to load reservations:', response.status);
             }
         } catch (error) {
-            console.error('Error loading reservations:', error);
+            console.error('❌ Error loading reservations:', error);
         }
     }
 
@@ -322,6 +330,19 @@ document.addEventListener('DOMContentLoaded', function() {
         cancelBookingBtn.addEventListener('click', resetBooking);
         
         bookingForm.addEventListener('submit', handleBookingSubmit);
+        
+        // Auto-refresh reservations every 30 seconds to sync with admin panel
+        setInterval(async () => {
+            await loadReservations();
+            renderCalendar();
+            // If user has date selected, refresh time slots too
+            if (selectedDate) {
+                const currentTimeSlots = document.getElementById('time-slots-grid');
+                if (currentTimeSlots) {
+                    showTimeSlots(selectedDate);
+                }
+            }
+        }, 30000); // 30 seconds
     }
 
     // Render calendar
@@ -589,6 +610,9 @@ document.addEventListener('DOMContentLoaded', function() {
         if (result.success) {
             // Reload reservations from server to ensure sync
             await loadReservations();
+            
+            // Re-render calendar to show booked slots
+            renderCalendar();
             
             // Show success message
             alert(`Rezervace byla úspěšně vytvořena!\n\nDatum: ${formatDateCzech(selectedDate)}\nČas: ${startTime} - ${endTime}\nDoba: ${duration} ${hoursText}\nCelková cena: ${totalPrice} Kč\n\nPotvrzení jsme vám zaslali na ${bookingData.email}`);
