@@ -161,13 +161,32 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // ========== BOOKING CALENDAR SYSTEM ==========
     
-    // Booking data (simulated - in production, this would come from a backend)
-    const bookedSlots = {
-        // Format: 'YYYY-MM-DD': ['09:00', '14:00', ...]
-        '2025-10-15': ['09:00', '10:00', '14:00'],
-        '2025-10-16': ['11:00', '15:00'],
-        '2025-10-20': ['09:00', '10:00', '11:00', '13:00', '14:00', '15:00', '16:00']
-    };
+    // Booking data (loaded from API)
+    let bookedSlots = {};
+    let allReservations = [];
+    
+    // Load reservations from API
+    async function loadReservations() {
+        try {
+            const response = await fetch('https://pricna-api.pricna-service.workers.dev/api/reservations');
+            if (response.ok) {
+                allReservations = await response.json();
+                // Build bookedSlots from reservations (only active ones)
+                bookedSlots = {};
+                allReservations.forEach(reservation => {
+                    if (reservation.status !== 'cancelled') {
+                        const times = reservation.time.split(', ');
+                        if (!bookedSlots[reservation.date]) {
+                            bookedSlots[reservation.date] = [];
+                        }
+                        bookedSlots[reservation.date].push(...times);
+                    }
+                });
+            }
+        } catch (error) {
+            console.error('Error loading reservations:', error);
+        }
+    }
 
     // Available time slots (7:00 - 19:00, hourly, last booking 18:00-19:00)
     const timeSlots = [
@@ -179,6 +198,11 @@ document.addEventListener('DOMContentLoaded', function() {
     const PRICE_PER_HOUR = 99;
     const PRICE_FULL_DAY = 399; // 4+ hours
     const FULL_DAY_THRESHOLD = 4;
+    
+    // Initialize calendar on page load
+    if (calendarGrid) {
+        initCalendar();
+    }
 
     // Automatické generování českých státních svátků
     function calculateEaster(year) {
@@ -284,7 +308,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Initialize calendar
-    function initCalendar() {
+    async function initCalendar() {
+        // Load reservations first
+        await loadReservations();
+        
         renderCalendar();
         
         prevMonthBtn.addEventListener('click', () => {
@@ -565,14 +592,8 @@ document.addEventListener('DOMContentLoaded', function() {
         submitBtn.textContent = originalText;
         
         if (result.success) {
-            // Add to booked slots locally
-            const dateString = formatDate(selectedDate);
-            if (!bookedSlots[dateString]) {
-                bookedSlots[dateString] = [];
-            }
-            selectedTimeSlots.forEach(slot => {
-                bookedSlots[dateString].push(slot);
-            });
+            // Reload reservations from server to ensure sync
+            await loadReservations();
             
             // Show success message
             alert(`Rezervace byla úspěšně vytvořena!\n\nDatum: ${formatDateCzech(selectedDate)}\nČas: ${startTime} - ${endTime}\nDoba: ${duration} ${hoursText}\nCelková cena: ${totalPrice} Kč\n\nPotvrzení jsme vám zaslali na ${bookingData.email}`);
