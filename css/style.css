@@ -2287,3 +2287,648 @@ footer {
         font-size: 1.1rem;
     }
 }
+
+/* Modern Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(40px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.slide-up {
+    animation: slideUp 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.slide-in-left {
+    animation: slideInLeft 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.slide-in-right {
+    animation: slideInRight 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.scale-in {
+    animation: scaleIn 0.6s ease-out forwards;
+    opacity: 0;
+}
+
+/* Enhanced Contact Cards */
+.contacts-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.contact-card {
+    background: var(--white);
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), #f5d142);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.contact-card:hover::before {
+    transform: scaleX(1);
+}
+
+.contact-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.contact-icon {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, var(--primary-color), #f5d142);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s ease;
+}
+
+.contact-card:hover .contact-icon {
+    transform: rotate(360deg) scale(1.1);
+}
+
+.contact-icon i {
+    font-size: 2.5rem;
+    color: white;
+}
+
+.contact-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+    color: var(--text-color);
+}
+
+.contact-position {
+    color: var(--secondary-color);
+    font-size: 1rem;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.contact-card .contact-details p {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.contact-card .contact-details i {
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+.contact-card .contact-details a {
+    color: var(--text-color);
+    transition: color 0.3s ease;
+}
+
+.contact-card .contact-details a:hover {
+    color: var(--primary-color);
+}
+
+/* Company Info Cards */
+.company-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin: 40px 0;
+}
+
+.company-card {
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+    border-left: 5px solid var(--primary-color);
+}
+
+.company-card:hover {
+    transform: translateX(5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.company-icon {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 20px;
+    background: var(--primary-color);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.company-card:hover .company-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.company-icon i {
+    font-size: 2rem;
+    color: white;
+}
+
+.company-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: var(--text-color);
+}
+
+.company-details p {
+    margin: 10px 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: var(--secondary-color);
+}
+
+.company-details i {
+    color: var(--primary-color);
+    margin-top: 3px;
+}
+
+/* Enhanced Service Cards */
+.service-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.service-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(234, 187, 17, 0.1), rgba(234, 187, 17, 0.05));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.service-card:hover::before {
+    opacity: 1;
+}
+
+.service-card i {
+    transition: all 0.4s ease;
+}
+
+.service-card:hover i {
+    transform: scale(1.2) rotate(10deg);
+}
+
+/* Enhanced Page Headers */
+.page-header {
+    background: linear-gradient(135deg, rgba(234, 187, 17, 0.9), rgba(245, 209, 66, 0.9)), 
+                url('../images/pricna_ulice.jpg') center/cover no-repeat;
+    padding: 120px 0 80px;
+    text-align: center;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.page-header::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: linear-gradient(to top, white, transparent);
+}
+
+.page-header h1 {
+    font-size: 3rem;
+    margin-bottom: 15px;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.page-header p {
+    font-size: 1.3rem;
+    animation: fadeIn 1s ease-out;
+    animation-delay: 0.2s;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+/* Enhanced Reception Cards */
+.reception-card {
+    background: var(--white);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+}
+
+.reception-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.reception-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+    font-size: 1.4rem;
+}
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Button Enhancements */
+.btn {
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+    z-index: -1;
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Enhanced Office Cards */
+.office-card {
+    background: var(--white);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+    position: relative;
+}
+
+.office-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: linear-gradient(90deg, var(--primary-color), #f5d142);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+    z-index: 1;
+}
+
+.office-card:hover::before {
+    transform: scaleX(1);
+}
+
+.office-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.office-img-placeholder {
+    height: 220px;
+    background: linear-gradient(135deg, #e9ecef, #f8f9fa);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s ease;
+}
+
+.office-card:hover .office-img-placeholder {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+}
+
+.office-img-placeholder i {
+    font-size: 3rem;
+    color: var(--secondary-color);
+    transition: all 0.4s ease;
+}
+
+.office-card:hover .office-img-placeholder i {
+    transform: scale(1.2) rotate(15deg);
+    color: var(--primary-color);
+}
+
+/* Enhanced Apartment Cards */
+.apartment-card {
+    position: relative;
+    overflow: hidden;
+}
+
+.apartment-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(234, 187, 17, 0.1), transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.apartment-card:hover::after {
+    opacity: 1;
+}
+
+.apartment-img-placeholder {
+    height: 220px;
+    background: linear-gradient(135deg, #e9ecef, #f8f9fa);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.apartment-img-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.apartment-card:hover .apartment-img-placeholder img {
+    transform: scale(1.1) rotate(2deg);
+}
+
+.apartment-img-placeholder i {
+    font-size: 3rem;
+    color: var(--secondary-color);
+}
+
+/* Enhanced Building Sections */
+.building-section {
+    margin: 60px 0;
+    padding: 30px;
+    background: linear-gradient(135deg, #ffffff, #f8f9fa);
+    border-radius: 16px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.06);
+    transition: all 0.4s ease;
+}
+
+.building-section:hover {
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+.building-title {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    position: relative;
+    padding-left: 20px;
+}
+
+.building-title::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 5px;
+    height: 70%;
+    background: var(--primary-color);
+    border-radius: 3px;
+}
+
+/* Enhanced Info Cards */
+.info-card {
+    background: var(--white);
+    padding: 35px 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.info-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--primary-color), #f5d142);
+    transform: scaleX(0);
+    transition: transform 0.4s ease;
+}
+
+.info-card:hover::before {
+    transform: scaleX(1);
+}
+
+.info-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.info-card i {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    transition: all 0.4s ease;
+}
+
+.info-card:hover i {
+    transform: scale(1.2) rotate(10deg);
+}
+
+.info-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: var(--text-color);
+}
+
+/* Enhanced Gallery */
+.coworking-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    height: 250px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+}
+
+.gallery-item:hover {
+    transform: scale(1.03);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-item-large {
+    grid-column: span 2;
+    height: 350px;
+}
+
+.gallery-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.gallery-item:hover .gallery-image {
+    transform: scale(1.1);
+}
+
+/* Map Container Enhancement */
+.map-container {
+    margin-top: 20px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s ease;
+}
+
+.map-container:hover {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+}
+
+.map-container iframe {
+    transition: all 0.4s ease;
+}
+
+/* Section Title Margin */
+.section-title-margin {
+    margin-top: 60px;
+}
+
+/* Responsive for new contact cards */
+@media (max-width: 768px) {
+    .contacts-grid,
+    .company-info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .page-header h1 {
+        font-size: 2.2rem;
+    }
+    
+    .page-header p {
+        font-size: 1.1rem;
+    }
+    
+    .coworking-gallery {
+        grid-template-columns: 1fr;
+    }
+    
+    .gallery-item-large {
+        grid-column: span 1;
+        height: 250px;
+    }
+}
