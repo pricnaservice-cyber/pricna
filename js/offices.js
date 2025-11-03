@@ -123,8 +123,8 @@ const officesData = {
     }
 };
 
-// Modal functionality - wait for DOM to be ready
-document.addEventListener('DOMContentLoaded', function() {
+// Modal functionality - initialize immediately or when DOM is ready
+function initializeOfficeModal() {
     const modal = document.getElementById('office-modal');
     const modalBody = document.getElementById('modal-body');
     const closeBtn = document.querySelector('.modal-close');
@@ -136,9 +136,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Open modal
     document.querySelectorAll('.office-detail-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
             const officeId = this.getAttribute('data-office');
             const office = officesData[officeId];
+            
+            console.log('Clicked office:', officeId, office);
             
             if (office) {
                 showOfficeDetails(office, modalBody);
@@ -162,7 +165,17 @@ document.addEventListener('DOMContentLoaded', function() {
             document.body.style.overflow = '';
         }
     });
-});
+    
+    console.log('Office modal initialized');
+}
+
+// Check if DOM is already loaded
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeOfficeModal);
+} else {
+    // DOM is already loaded, initialize immediately
+    initializeOfficeModal();
+}
 
 // Show office details
 function showOfficeDetails(office, modalBody) {
