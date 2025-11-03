@@ -2717,6 +2717,19 @@ html {
     color: var(--primary-color);
 }
 
+.office-capacity {
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    margin: 8px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.office-capacity i {
+    color: var(--primary-color);
+}
+
 /* Enhanced Apartment Cards */
 .apartment-card {
     position: relative;

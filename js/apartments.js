@@ -3,43 +3,43 @@ const apartmentsData = {
     'apt-1': {
         title: 'Byt 1+kk',
         location: 'Příčná, Havířov',
-        size: '35 m²',
+        size: '29 m²',
         price: '15 000 Kč/měsíc',
         deposit: '15 000 Kč',
         utilities: '3 000 Kč/měsíc',
-        description: 'Útulný byt 1+kk ideální pro jednotlivce. Kompletně zařízený s moderním nábytkem. V klidné části budovy s výhledem do dvora.',
+        description: 'Nabízíme Vám k dlouhodobému pronájmu byt o dispozici 1+kk a výměře 29 m², který se nachází na ulici Příčné v Havířově. Bytová jednotka se nachází v bytovém domě, který prošel kompletní rekonstrukcí. Byt je světlý, útulný a připravený k okamžitému nastěhování.',
         images: [
             'images/Byty/byt_11_kuchyne.JPG',
             'images/Byty/byt_11_koupelna.JPG'
         ],
         features: [
-            'Plně zařízený',
-            'Pračka',
-            'Lednice s mrazákem',
-            'Varná deska a trouba',
+            'Moderní kuchyňská linka',
+            'Varná deska',
+            'Trouba',
             'Rychlá internetová přípojka',
-            'Sklep'
+            'Sklepní kóje',
+            'Recepční služby'
         ],
         available: 'Ihned'
     },
     'apt-2': {
         title: 'Byt 2+kk',
         location: 'Příčná, Havířov',
-        size: '50 m²',
+        size: '43 m²',
         price: '20 000 Kč/měsíc',
         deposit: '20 000 Kč',
         utilities: '3 500 Kč/měsíc',
-        description: 'Prostorný byt 2+kk s oddělenou ložnicí. Moderně zařízený, s balkonem. Perfektní pro páry nebo jednotlivce hledající více prostoru.',
+        description: 'Nabízíme Vám k dlouhodobému pronájmu byt o dispozici 2+kk a výměře 43 m², který se nachází na ulici Příčné v Havířově. Bytová jednotka se nachází v bytovém domě, který prošel kompletní rekonstrukcí. Byt je světlý, útulný a připravený k okamžitému nastěhování.',
+        images: [],
         features: [
-            'Plně zařízený',
-            'Balkon',
-            'Pračka a sušička',
-            'Myčka nádobí',
-            'Vestavěné skříně',
+            'Moderní kuchyňská linka',
+            'Varná deska',
+            'Trouba',
             'Rychlá internetová přípojka',
-            'Sklep'
+            'Sklepní kóje',
+            'Recepční služby'
         ],
-        available: 'Od 1.11.2025'
+        available: 'Ihned'
     }
 };
 

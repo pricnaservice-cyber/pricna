@@ -1,131 +1,154 @@
 // Office details data
 const officesData = {
-    'pricna1-101': {
-        title: 'Kancelář 101',
+    // Příčná 1
+    'pricna1-15': {
+        title: 'Kancelář 15 m²',
+        building: 'Příčná 1',
+        location: 'Příčná 1, Havířov - Město',
+        size: '15 m²',
+        capacity: 'Ideální pro 1-2 osoby',
+        description: 'Nabízíme k pronájmu útulnou kancelář o velikosti 15 m², ideální pro jednu až dvě osoby. Prostor se nachází v klidné a udržované budově, vhodné pro administrativní nebo podnikatelské účely. Kancelář je světlá, čistá a připravená k okamžitému nastěhování.',
+        features: [
+            'Recepce v budově',
+            'Klidné a příjemné pracovní prostředí',
+            'Sdílené sociální zázemí a kuchyňka',
+            'Výborná dostupnost – MHD i parkování přímo u objektu',
+            'Nízké provozní náklady',
+            'Možnost okamžitého nastěhování'
+        ]
+    },
+    'pricna1-30': {
+        title: 'Kancelář 30 m²',
+        building: 'Příčná 1',
+        location: 'Příčná 1, Havířov - Město',
+        size: '30 m²',
+        capacity: 'Ideální pro 2-4 osoby',
+        description: 'Nabízíme k pronájmu útulnou kancelář o velikosti 30 m², ideální pro dvě až čtyři osoby. Prostor se nachází v klidné a udržované budově, vhodné pro administrativní nebo podnikatelské účely. Kancelář je světlá, čistá a připravená k okamžitému nastěhování.',
+        features: [
+            'Recepce v budově',
+            'Klidné a příjemné pracovní prostředí',
+            'Sdílené sociální zázemí a kuchyňka',
+            'Výborná dostupnost – MHD i parkování přímo u objektu',
+            'Nízké provozní náklady',
+            'Možnost okamžitého nastěhování'
+        ]
+    },
+    'pricna1-45': {
+        title: 'Kancelář 45 m²',
         building: 'Příčná 1',
         location: 'Příčná 1, Havířov - Město',
         size: '45 m²',
-        price: '18 000 Kč/měsíc',
-        description: 'Moderní kancelář v Havířově. Ideální pro malý tým nebo freelancery. Plně vybavená, s klimatizací a vysokorychlostním internetem.',
+        capacity: 'Pro menší firmu nebo tým',
+        description: 'Nabízíme k pronájmu útulnou kancelář o velikosti 45 m², ideální pro menší firmu nebo tým lidí. Prostor se nachází v klidné a udržované budově, vhodné pro administrativní nebo podnikatelské účely. Kancelář je světlá, čistá a připravená k okamžitému nastěhování.',
         features: [
-            'Klimatizace',
-            'Vysokorychlostní internet',
-            'Vlastní kuchyňka',
-            'Parkovací místo (za příplatek)',
-            'Recepce v budově'
+            'Recepce v budově',
+            'Klidné a příjemné pracovní prostředí',
+            'Sdílené sociální zázemí a kuchyňka',
+            'Výborná dostupnost – MHD i parkování přímo u objektu',
+            'Nízké provozní náklady',
+            'Možnost okamžitého nastěhování'
         ]
     },
-    'pricna1-102': {
-        title: 'Kancelář 102',
+    'pricna1-custom': {
+        title: 'Individuální nabídka',
         building: 'Příčná 1',
         location: 'Příčná 1, Havířov - Město',
-        size: '60 m²',
-        price: '24 000 Kč/měsíc',
-        description: 'Prostorná kancelář s výhledem na ulici. Vhodná pro menší firmu nebo tým. Moderní vybavení a příjemné pracovní prostředí.',
+        size: 'Dle potřeby',
+        capacity: 'Přizpůsobeno vašim požadavkům',
+        description: 'Rádi Vám připravíme individuální nabídku metráže na Vámi požadované účely. Kontaktujte nás a společně najdeme ideální řešení pro vaše potřeby.',
         features: [
-            'Klimatizace',
-            'Vysokorychlostní internet',
-            'Vlastní sociální zařízení',
-            'Parkovací místo (za příplatek)',
-            'Recepce v budově',
-            'Výhled na ulici'
-        ]
-    },
-    'pricna1-201': {
-        title: 'Kancelář 201',
-        building: 'Příčná 1',
-        location: 'Příčná 1, Havířov - Město',
-        size: '80 m²',
-        price: '32 000 Kč/měsíc',
-        description: 'Velká kancelář na druhém patře s výborným osvětlením. Ideální pro větší tým nebo firmu. Možnost úpravy dispozice podle potřeb.',
-        features: [
-            'Klimatizace',
-            'Vysokorychlostní internet',
-            'Vlastní kuchyňka a sociální zařízení',
-            '2 parkovací místa (za příplatek)',
-            'Recepce v budově',
-            'Velká okna - přirozené světlo'
-        ]
-    },
-    'pricna2-105': {
-        title: 'Kancelář 105',
-        building: 'Příčná 2',
-        location: 'Příčná 2, Havířov - Město',
-        size: '55 m²',
-        price: '22 000 Kč/měsíc',
-        description: 'Kancelář v klidné části budovy. Perfektní pro firmy vyžadující soustředěné pracovní prostředí. Moderní design a vybavení.',
-        features: [
-            'Klimatizace',
-            'Vysokorychlostní internet',
-            'Sdílená kuchyňka',
-            'Parkovací místo (za příplatek)',
-            'Klidná část budovy'
-        ]
-    },
-    'pricna2-203': {
-        title: 'Kancelář 203',
-        building: 'Příčná 2',
-        location: 'Příčná 2, Havířov - Město',
-        size: '70 m²',
-        price: '28 000 Kč/měsíc',
-        description: 'Prostorná kancelář s možností rozdělení na dvě místnosti. Vhodná pro firmy s různými odděleními nebo potřebou soukromí.',
-        features: [
-            'Klimatizace',
-            'Vysokorychlostní internet',
-            'Možnost rozdělení prostoru',
-            'Vlastní sociální zařízení',
-            'Parkovací místo (za příplatek)',
-            'Balkon'
-        ]
-    },
-    'delnicka-301': {
-        title: 'Kancelář 301',
-        building: 'Dělnická 41',
-        location: 'Dělnická 41, Havířov - Podlesí',
-        size: '50 m²',
-        price: '20 000 Kč/měsíc',
-        description: 'Moderní kancelář v Havířově. Skvělé dopravní spojení, v okolí kavárny a restaurace. Ideální pro kreativní týmy.',
-        features: [
-            'Klimatizace',
-            'Vysokorychlostní internet',
-            'Sdílená kuchyňka',
-            'Recepce v budově',
-            'Výborné dopravní spojení'
-        ]
-    },
-    'delnicka-302': {
-        title: 'Kancelář 302',
-        building: 'Dělnická 41',
-        location: 'Dělnická 41, Havířov - Podlesí',
-        size: '90 m²',
-        price: '36 000 Kč/měsíc',
-        description: 'Velká open-space kancelář s moderním designem. Perfektní pro větší týmy nebo start-upy. Flexibilní uspořádání pracovních míst.',
-        features: [
-            'Klimatizace',
-            'Vysokorychlostní internet',
-            'Open-space design',
-            'Vlastní kuchyňka a sociální zařízení',
-            '2 parkovací místa (za příplatek)',
-            'Recepce v budově',
-            'Moderní design'
-        ]
-    },
-    'delnicka-401': {
-        title: 'Kancelář 401',
-        building: 'Dělnická 41',
-        location: 'Dělnická 41, Havířov - Podlesí',
-        size: '120 m²',
-        price: '48 000 Kč/měsíc',
-        description: 'Prémiová kancelář na nejvyšším patře s krásným výhledem. Ideální pro etablované firmy. Reprezentativní prostory s možností úprav.',
-        features: [
-            'Klimatizace',
-            'Vysokorychlostní internet',
-            'Krásný výhled',
-            'Vlastní kuchyňka a 2x sociální zařízení',
-            '3 parkovací místa (za příplatek)',
-            'Recepce v budově',
+            'Flexibilní velikost prostoru',
+            'Individuální řešení podle vašich požadavků',
             'Možnost úprav interiéru',
-            'Terasa'
+            'Profesionální přístup',
+            'Konzultace zdarma'
+        ]
+    },
+    // Příčná 2
+    'pricna2-15': {
+        title: 'Kancelář 15 m²',
+        building: 'Příčná 2',
+        location: 'Příčná 2, Havířov - Město',
+        size: '15 m²',
+        capacity: 'Ideální pro 1-2 osoby',
+        description: 'Nabízíme k pronájmu útulnou kancelář o velikosti 15 m², ideální pro jednu až dvě osoby. Prostor se nachází v klidné a udržované budově, vhodné pro administrativní nebo podnikatelské účely. Kancelář je světlá, čistá a připravená k okamžitému nastěhování.',
+        features: [
+            'Možnost využití recepce ve vedlejší budově',
+            'Možnost instalace umyvadla',
+            'Klidné a příjemné pracovní prostředí',
+            'Sdílené sociální zázemí a kuchyňka',
+            'Výborná dostupnost – MHD i parkování přímo u objektu',
+            'Nízké provozní náklady',
+            'Možnost okamžitého nastěhování'
+        ]
+    },
+    'pricna2-30': {
+        title: 'Kancelář 30 m²',
+        building: 'Příčná 2',
+        location: 'Příčná 2, Havířov - Město',
+        size: '30 m²',
+        capacity: 'Ideální pro 2-4 osoby',
+        description: 'Nabízíme k pronájmu útulnou kancelář o velikosti 30 m², ideální pro dvě až čtyři osoby. Prostor se nachází v klidné a udržované budově, vhodné pro administrativní nebo podnikatelské účely. Kancelář je světlá, čistá a připravená k okamžitému nastěhování.',
+        features: [
+            'Možnost využití recepce ve vedlejší budově',
+            'Možnost instalace umyvadla',
+            'Klidné a příjemné pracovní prostředí',
+            'Sdílené sociální zázemí a kuchyňka',
+            'Výborná dostupnost – MHD i parkování přímo u objektu',
+            'Nízké provozní náklady',
+            'Možnost okamžitého nastěhování'
+        ]
+    },
+    // Dělnická 41
+    'delnicka-15': {
+        title: 'Kancelář 15 m²',
+        building: 'Dělnická 41',
+        location: 'Dělnická 41, Havířov - Prostřední Suchá',
+        size: '15 m²',
+        capacity: 'Ideální pro 1-2 osoby',
+        description: 'Nabízíme k pronájmu útulnou kancelář o velikosti 15 m², ideální pro jednu až dvě osoby. Prostor se nachází v klidné a udržované budově, vhodné pro administrativní nebo podnikatelské účely. Kancelář je světlá, čistá a připravená k okamžitému nastěhování.',
+        features: [
+            'Recepce v budově',
+            'Možnost privátního parkovacího místa',
+            'Klidné a příjemné pracovní prostředí',
+            'Blízkost obchodního komplexu',
+            'Sdílené sociální zázemí a kuchyňka',
+            'Výborná dostupnost – MHD i parkování přímo u objektu',
+            'Nízké provozní náklady',
+            'Možnost okamžitého nastěhování'
+        ]
+    },
+    'delnicka-120': {
+        title: 'Kancelář 120 m²',
+        building: 'Dělnická 41',
+        location: 'Dělnická 41, Havířov - Prostřední Suchá',
+        size: '120 m²',
+        capacity: 'Pro menší až střední firmy',
+        description: 'Nabízíme k pronájmu zrekonstruované prostory o velikosti 120 m² vhodné pro menší až střední firmy. Prostor se nachází v klidné a udržované budově, vhodné pro administrativní nebo podnikatelské účely. Možnost výběru Vámi preferované podlahové krytiny.',
+        features: [
+            'Recepce v budově',
+            'Možnost privátního parkovacího místa',
+            'Klidné a příjemné pracovní prostředí',
+            'Blízkost obchodního komplexu',
+            'Sdílené sociální zázemí a kuchyňka',
+            'Výborná dostupnost – MHD i parkování přímo u objektu',
+            'Nízké provozní náklady',
+            'Možnost výběru podlahové krytiny'
+        ]
+    },
+    'delnicka-custom': {
+        title: 'Individuální nabídka',
+        building: 'Dělnická 41',
+        location: 'Dělnická 41, Havířov - Prostřední Suchá',
+        size: 'Dle potřeby',
+        capacity: 'Přizpůsobeno vašim požadavkům',
+        description: 'Rádi Vám připravíme individuální nabídku metráže na Vámi požadované účely. Kontaktujte nás a společně najdeme ideální řešení pro vaše potřeby.',
+        features: [
+            'Flexibilní velikost prostoru',
+            'Individuální řešení podle vašich požadavků',
+            'Možnost úprav interiéru',
+            'Profesionální přístup',
+            'Konzultace zdarma'
         ]
     }
 };
@@ -182,8 +205,8 @@ function showOfficeDetails(office) {
                 <strong>Velikost:</strong> ${office.size}
             </div>
             <div class="detail-item">
-                <i class="fas fa-euro-sign"></i>
-                <strong>Cena:</strong> ${office.price}
+                <i class="fas fa-users"></i>
+                <strong>Kapacita:</strong> ${office.capacity}
             </div>
         </div>
         

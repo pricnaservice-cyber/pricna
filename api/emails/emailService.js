@@ -55,9 +55,9 @@ async function sendReservationConfirmation(reservationData) {
     const html = renderTemplate(template, emailData);
     
     const mailOptions = {
-      from: `"Příčná Offices - Rezervace" <${process.env.EMAIL_RESERVATIONS}>`,
+      from: '"Příčná Offices - Rezervace" <noreply@pricna.cz>',
       to: reservationData.email,
-      subject: 'Potvrzení rezervace - Sdílené kanceláře Příčná',
+      subject: 'Potvrzení rezervace - Sdílená kancelář Příčná',
       html: html
     };
     
@@ -90,14 +90,14 @@ async function sendReservationNotification(reservationData) {
     
     const html = renderTemplate(template, emailData);
     
-    // Notifikace přijde na rezervace@pricna.cz a j.stachovsky@gmail.com
+    // Notifikace přijde na j.stachovsky@gmail.com a pricna.apartments@gmail.com
     const recipients = [
-      process.env.EMAIL_RESERVATIONS,
-      process.env.EMAIL_OWNER
-    ].filter(Boolean).join(', ');
+      'j.stachovsky@gmail.com',
+      'pricna.apartments@gmail.com'
+    ].join(', ');
     
     const mailOptions = {
-      from: `"Příčná Offices - Rezervační systém" <${process.env.EMAIL_RESERVATIONS}>`,
+      from: '"Příčná Offices - Rezervační systém" <noreply@pricna.cz>',
       to: recipients,
       subject: `🔔 Nová rezervace #${reservationData.id} - ${reservationData.date}`,
       html: html
@@ -125,7 +125,7 @@ async function sendInquiryConfirmation(inquiryData) {
     const html = renderTemplate(template, emailData);
     
     const mailOptions = {
-      from: `"Příčná Offices & Apartments" <${process.env.EMAIL_INFO}>`,
+      from: '"Příčná Offices & Apartments" <noreply@pricna.cz>',
       to: inquiryData.email,
       subject: 'Děkujeme za Váš zájem - Příčná Offices & Apartments',
       html: html
@@ -168,14 +168,14 @@ async function sendInquiryNotification(inquiryData) {
     
     const html = renderTemplate(template, emailData);
     
-    // Notifikace přijde na info@pricna.cz a j.stachovsky@gmail.com
+    // Notifikace přijde na j.stachovsky@gmail.com a pricna.apartments@gmail.com
     const recipients = [
-      process.env.EMAIL_INFO,
-      process.env.EMAIL_OWNER
-    ].filter(Boolean).join(', ');
+      'j.stachovsky@gmail.com',
+      'pricna.apartments@gmail.com'
+    ].join(', ');
     
     const mailOptions = {
-      from: `"Příčná Offices - Formuláře" <${process.env.EMAIL_INFO}>`,
+      from: '"Příčná Offices - Formuláře" <noreply@pricna.cz>',
       to: recipients,
       subject: `${typeLabels[inquiryData.type]} - ${inquiryData.name}`,
       html: html

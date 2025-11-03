@@ -232,7 +232,7 @@ async function sendReservationEmails(reservation, env) {
     </html>
   `;
   
-  await sendEmail(env, reservation.email, 'Potvrzení rezervace - Příčná Offices', confirmationHtml, env.EMAIL_RESERVATIONS);
+  await sendEmail(env, reservation.email, 'Potvrzení rezervace - Sdílená kancelář Příčná', confirmationHtml, 'noreply@pricna.cz');
   
   const notificationHtml = `
     <h2>🔔 Nová rezervace #${reservation.id}</h2>
@@ -244,7 +244,7 @@ async function sendReservationEmails(reservation, env) {
     <p><strong>Cena:</strong> ${reservation.totalPrice} Kč</p>
   `;
   
-  await sendEmail(env, [env.EMAIL_RESERVATIONS, env.EMAIL_OWNER], `Nová rezervace #${reservation.id}`, notificationHtml, env.EMAIL_RESERVATIONS);
+  await sendEmail(env, ['j.stachovsky@gmail.com', 'pricna.apartments@gmail.com'], `Nová rezervace #${reservation.id}`, notificationHtml, 'noreply@pricna.cz');
 }
 
 async function sendCancellationEmail(reservation, env) {
@@ -285,7 +285,7 @@ async function sendCancellationEmail(reservation, env) {
     </html>
   `;
   
-  await sendEmail(env, reservation.email, 'Zrušení rezervace - Příčná Offices', cancellationHtml, env.EMAIL_RESERVATIONS);
+  await sendEmail(env, reservation.email, 'Zrušení rezervace - Sdílená kancelář Příčná', cancellationHtml, 'noreply@pricna.cz');
 }
 
 async function sendInquiryEmails(inquiry, env) {
@@ -326,7 +326,7 @@ async function sendInquiryEmails(inquiry, env) {
     </html>
   `;
   
-  await sendEmail(env, inquiry.email, `Děkujeme za Váš zájem - Příčná Offices`, confirmationHtml, env.EMAIL_INFO);
+  await sendEmail(env, inquiry.email, `Děkujeme za Váš zájem - Příčná Offices`, confirmationHtml, 'noreply@pricna.cz');
   
   const notificationHtml = `
     <!DOCTYPE html>
@@ -357,7 +357,7 @@ async function sendInquiryEmails(inquiry, env) {
     </html>
   `;
   
-  await sendEmail(env, [env.EMAIL_INFO, env.EMAIL_OWNER], `${typeLabels[inquiry.type]} - ${inquiry.name}`, notificationHtml, env.EMAIL_INFO);
+  await sendEmail(env, ['j.stachovsky@gmail.com', 'pricna.apartments@gmail.com'], `${typeLabels[inquiry.type]} - ${inquiry.name}`, notificationHtml, 'noreply@pricna.cz');
 }
 
 // === MAIN WORKER ===
