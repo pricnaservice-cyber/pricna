@@ -49,21 +49,6 @@ const officesData = {
             'Možnost okamžitého nastěhování'
         ]
     },
-    'pricna1-custom': {
-        title: 'Individuální nabídka',
-        building: 'Příčná 1',
-        location: 'Příčná 1, Havířov - Město',
-        size: 'Dle potřeby',
-        capacity: 'Přizpůsobeno vašim požadavkům',
-        description: 'Rádi Vám připravíme individuální nabídku metráže na Vámi požadované účely. Kontaktujte nás a společně najdeme ideální řešení pro vaše potřeby.',
-        features: [
-            'Flexibilní velikost prostoru',
-            'Individuální řešení podle vašich požadavků',
-            'Možnost úprav interiéru',
-            'Profesionální přístup',
-            'Konzultace zdarma'
-        ]
-    },
     // Příčná 2
     'pricna2-15': {
         title: 'Kancelář 15 m²',
@@ -135,58 +120,52 @@ const officesData = {
             'Nízké provozní náklady',
             'Možnost výběru podlahové krytiny'
         ]
-    },
-    'delnicka-custom': {
-        title: 'Individuální nabídka',
-        building: 'Dělnická 41',
-        location: 'Dělnická 41, Havířov - Prostřední Suchá',
-        size: 'Dle potřeby',
-        capacity: 'Přizpůsobeno vašim požadavkům',
-        description: 'Rádi Vám připravíme individuální nabídku metráže na Vámi požadované účely. Kontaktujte nás a společně najdeme ideální řešení pro vaše potřeby.',
-        features: [
-            'Flexibilní velikost prostoru',
-            'Individuální řešení podle vašich požadavků',
-            'Možnost úprav interiéru',
-            'Profesionální přístup',
-            'Konzultace zdarma'
-        ]
     }
 };
 
-// Modal functionality
-const modal = document.getElementById('office-modal');
-const modalBody = document.getElementById('modal-body');
-const closeBtn = document.querySelector('.modal-close');
+// Modal functionality - wait for DOM to be ready
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('office-modal');
+    const modalBody = document.getElementById('modal-body');
+    const closeBtn = document.querySelector('.modal-close');
 
-// Open modal
-document.querySelectorAll('.office-detail-btn').forEach(btn => {
-    btn.addEventListener('click', function() {
-        const officeId = this.getAttribute('data-office');
-        const office = officesData[officeId];
-        
-        if (office) {
-            showOfficeDetails(office);
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
+    if (!modal || !modalBody || !closeBtn) {
+        console.error('Modal elements not found');
+        return;
+    }
+
+    // Open modal
+    document.querySelectorAll('.office-detail-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const officeId = this.getAttribute('data-office');
+            const office = officesData[officeId];
+            
+            if (office) {
+                showOfficeDetails(office, modalBody);
+                modal.style.display = 'block';
+                document.body.style.overflow = 'hidden';
+            } else {
+                console.error('Office data not found for:', officeId);
+            }
+        });
+    });
+
+    // Close modal
+    closeBtn.addEventListener('click', function() {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+    });
+
+    window.addEventListener('click', function(e) {
+        if (e.target === modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
         }
     });
 });
 
-// Close modal
-closeBtn.addEventListener('click', function() {
-    modal.style.display = 'none';
-    document.body.style.overflow = '';
-});
-
-window.addEventListener('click', function(e) {
-    if (e.target === modal) {
-        modal.style.display = 'none';
-        document.body.style.overflow = '';
-    }
-});
-
 // Show office details
-function showOfficeDetails(office) {
+function showOfficeDetails(office, modalBody) {
     const featuresHTML = office.features.map(feature => `<li><i class="fas fa-check"></i> ${feature}</li>`).join('');
     
     modalBody.innerHTML = `
