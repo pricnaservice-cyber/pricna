@@ -357,7 +357,7 @@ async function sendInquiryEmails(inquiry, env) {
     </html>
   `;
   
-  await sendEmail(env, ['j.stachovsky@gmail.com', 'pricna.apartments@gmail.com'], `${typeLabels[inquiry.type]} - ${inquiry.name}`, notificationHtml, 'noreply@pricna.cz');
+  await sendEmail(env, 'j.stachovsky@gmail.com', `${typeLabels[inquiry.type]} - ${inquiry.name}`, notificationHtml, 'noreply@pricna.cz');
 }
 
 // === MAIN WORKER ===

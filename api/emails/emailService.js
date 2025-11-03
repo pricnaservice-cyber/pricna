@@ -168,11 +168,8 @@ async function sendInquiryNotification(inquiryData) {
     
     const html = renderTemplate(template, emailData);
     
-    // Notifikace přijde na j.stachovsky@gmail.com a pricna.apartments@gmail.com
-    const recipients = [
-      'j.stachovsky@gmail.com',
-      'pricna.apartments@gmail.com'
-    ].join(', ');
+    // Notifikace přijde pouze na j.stachovsky@gmail.com (formuláře)
+    const recipients = 'j.stachovsky@gmail.com';
     
     const mailOptions = {
       from: '"Příčná Offices - Formuláře" <noreply@pricna.cz>',
