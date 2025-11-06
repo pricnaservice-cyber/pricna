@@ -24,6 +24,12 @@ const officesData = {
         size: '30 m²',
         capacity: 'Ideální pro 2-4 osoby',
         description: 'Nabízíme k pronájmu útulnou kancelář o velikosti 30 m², ideální pro dvě až čtyři osoby. Prostor se nachází v klidné a udržované budově, vhodné pro administrativní nebo podnikatelské účely. Kancelář je světlá, čistá a připravená k okamžitému nastěhování.',
+        images: [
+            'images/kancelar_pricna/pricna_30_1.JPG',
+            'images/kancelar_pricna/pricna_30_2.JPG',
+            'images/kancelar_pricna/pricna_30_3.JPG',
+            'images/kancelar_pricna/Pricna_30_4.JPG'
+        ],
         features: [
             'Recepce v budově',
             'Klidné a příjemné pracovní prostředí',
@@ -74,6 +80,12 @@ const officesData = {
         size: '30 m²',
         capacity: 'Ideální pro 2-4 osoby',
         description: 'Nabízíme k pronájmu útulnou kancelář o velikosti 30 m², ideální pro dvě až čtyři osoby. Prostor se nachází v klidné a udržované budově, vhodné pro administrativní nebo podnikatelské účely. Kancelář je světlá, čistá a připravená k okamžitému nastěhování.',
+        images: [
+            'images/kancelar_pricna/pricna_30_1.JPG',
+            'images/kancelar_pricna/pricna_30_2.JPG',
+            'images/kancelar_pricna/pricna_30_3.JPG',
+            'images/kancelar_pricna/Pricna_30_4.JPG'
+        ],
         features: [
             'Možnost využití recepce ve vedlejší budově',
             'Možnost instalace umyvadla',
@@ -92,6 +104,9 @@ const officesData = {
         size: '15 m²',
         capacity: 'Ideální pro 1-2 osoby',
         description: 'Nabízíme k pronájmu útulnou kancelář o velikosti 15 m², ideální pro jednu až dvě osoby. Prostor se nachází v klidné a udržované budově, vhodné pro administrativní nebo podnikatelské účely. Kancelář je světlá, čistá a připravená k okamžitému nastěhování.',
+        images: [
+            'images/kancelar_delnicka/delnicka_15_1.JPG'
+        ],
         features: [
             'Recepce v budově',
             'Možnost privátního parkovacího místa',
@@ -110,6 +125,10 @@ const officesData = {
         size: '120 m²',
         capacity: 'Pro menší až střední firmy',
         description: 'Nabízíme k pronájmu zrekonstruované prostory o velikosti 120 m² vhodné pro menší až střední firmy. Prostor se nachází v klidné a udržované budově, vhodné pro administrativní nebo podnikatelské účely. Možnost výběru Vámi preferované podlahové krytiny.',
+        images: [
+            'images/kancelar_delnicka/delnicka_120_1.JPG',
+            'images/kancelar_delnicka/delnicka_120_2.JPG'
+        ],
         features: [
             'Recepce v budově',
             'Možnost privátního parkovacího místa',
@@ -181,8 +200,16 @@ if (document.readyState === 'loading') {
 function showOfficeDetails(office, modalBody) {
     const featuresHTML = office.features.map(feature => `<li><i class="fas fa-check"></i> ${feature}</li>`).join('');
     
+    // Generate images gallery HTML if images exist
+    const imagesHTML = office.images && office.images.length > 0 ? `
+        <div class="modal-images-gallery">
+            ${office.images.map(img => `<img src="${img}" alt="${office.title}" class="office-image">`).join('')}
+        </div>
+    ` : '';
+    
     modalBody.innerHTML = `
         <h2>${office.title}</h2>
+        ${imagesHTML}
         <div class="modal-office-details">
             <div class="detail-item">
                 <i class="fas fa-building"></i>

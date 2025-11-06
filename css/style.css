@@ -1459,6 +1459,18 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
+}
+
+.office-img-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.office-card:hover .office-img-placeholder img {
+    transform: scale(1.05);
 }
 
 .office-img-placeholder i {
