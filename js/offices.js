@@ -7,6 +7,10 @@ const officesData = {
         location: 'Příčná 1, Havířov - Město',
         size: '15 m²',
         capacity: 'Ideální pro 1-2 osoby',
+        price: '2 300 Kč/měsíc',
+        utilities: '2 500 Kč/měsíc',
+        deposit: '10 000 Kč',
+        vatNote: 'Příčná Offices s.r.o. je plátce DPH - uvedené ceny jsou bez DPH',
         description: 'Nabízíme k pronájmu útulnou kancelář o velikosti 15 m², ideální pro jednu až dvě osoby. Prostor se nachází v klidné a udržované budově, vhodné pro administrativní nebo podnikatelské účely. Kancelář je světlá, čistá a připravená k okamžitému nastěhování.',
         features: [
             'Recepce v budově',
@@ -23,6 +27,10 @@ const officesData = {
         location: 'Příčná 1, Havířov - Město',
         size: '30 m²',
         capacity: 'Ideální pro 2-4 osoby',
+        price: '4 600 Kč/měsíc',
+        utilities: '5 000 Kč/měsíc',
+        deposit: '20 000 Kč',
+        vatNote: 'Příčná Offices s.r.o. je plátce DPH - uvedené ceny jsou bez DPH',
         description: 'Nabízíme k pronájmu útulnou kancelář o velikosti 30 m², ideální pro dvě až čtyři osoby. Prostor se nachází v klidné a udržované budově, vhodné pro administrativní nebo podnikatelské účely. Kancelář je světlá, čistá a připravená k okamžitému nastěhování.',
         images: [
             'images/kancelar_pricna/pricna_30_1.JPG',
@@ -45,6 +53,10 @@ const officesData = {
         location: 'Příčná 1, Havířov - Město',
         size: '45 m²',
         capacity: 'Pro menší firmu nebo tým',
+        price: '6 900 Kč/měsíc',
+        utilities: '7 500 Kč/měsíc',
+        deposit: '25 000 Kč',
+        vatNote: 'Příčná Offices s.r.o. je plátce DPH - uvedené ceny jsou bez DPH',
         description: 'Nabízíme k pronájmu útulnou kancelář o velikosti 45 m², ideální pro menší firmu nebo tým lidí. Prostor se nachází v klidné a udržované budově, vhodné pro administrativní nebo podnikatelské účely. Kancelář je světlá, čistá a připravená k okamžitému nastěhování.',
         features: [
             'Recepce v budově',
@@ -62,6 +74,10 @@ const officesData = {
         location: 'Příčná 2, Havířov - Město',
         size: '15 m²',
         capacity: 'Ideální pro 1-2 osoby',
+        price: '2 500 Kč/měsíc',
+        utilities: '2 750 Kč/měsíc',
+        deposit: '10 000 Kč',
+        vatNote: 'Příčná Apartments s.r.o. je neplátce DPH - uvedené ceny jsou s DPH',
         description: 'Nabízíme k pronájmu útulnou kancelář o velikosti 15 m², ideální pro jednu až dvě osoby. Prostor se nachází v klidné a udržované budově, vhodné pro administrativní nebo podnikatelské účely. Kancelář je světlá, čistá a připravená k okamžitému nastěhování.',
         features: [
             'Možnost využití recepce ve vedlejší budově',
@@ -79,6 +95,10 @@ const officesData = {
         location: 'Příčná 2, Havířov - Město',
         size: '30 m²',
         capacity: 'Ideální pro 2-4 osoby',
+        price: '5 000 Kč/měsíc',
+        utilities: '5 500 Kč/měsíc',
+        deposit: '20 000 Kč',
+        vatNote: 'Příčná Apartments s.r.o. je neplátce DPH - uvedené ceny jsou s DPH',
         description: 'Nabízíme k pronájmu útulnou kancelář o velikosti 30 m², ideální pro dvě až čtyři osoby. Prostor se nachází v klidné a udržované budově, vhodné pro administrativní nebo podnikatelské účely. Kancelář je světlá, čistá a připravená k okamžitému nastěhování.',
         images: [
             'images/kancelar_pricna/pricna_30_1.JPG',
@@ -103,6 +123,10 @@ const officesData = {
         location: 'Dělnická 41, Havířov - Prostřední Suchá',
         size: '15 m²',
         capacity: 'Ideální pro 1-2 osoby',
+        price: '2 000 Kč/měsíc',
+        utilities: '2 700 Kč/měsíc',
+        deposit: '10 000 Kč',
+        vatNote: 'Příčná Offices s.r.o. je plátce DPH - uvedené ceny jsou bez DPH',
         description: 'Nabízíme k pronájmu útulnou kancelář o velikosti 15 m², ideální pro jednu až dvě osoby. Prostor se nachází v klidné a udržované budově, vhodné pro administrativní nebo podnikatelské účely. Kancelář je světlá, čistá a připravená k okamžitému nastěhování.',
         images: [
             'images/kancelar_delnicka/delnicka_15_1.JPG'
@@ -124,6 +148,10 @@ const officesData = {
         location: 'Dělnická 41, Havířov - Prostřední Suchá',
         size: '120 m²',
         capacity: 'Pro menší až střední firmy',
+        price: '20 000 Kč/měsíc',
+        utilities: '21 600 Kč/měsíc',
+        deposit: '80 000 Kč',
+        vatNote: 'Příčná Offices s.r.o. je plátce DPH - uvedené ceny jsou bez DPH',
         description: 'Nabízíme k pronájmu zrekonstruované prostory o velikosti 120 m² vhodné pro menší až střední firmy. Prostor se nachází v klidné a udržované budově, vhodné pro administrativní nebo podnikatelské účely. Možnost výběru Vámi preferované podlahové krytiny.',
         images: [
             'images/kancelar_delnicka/delnicka_120_1.JPG',
@@ -227,7 +255,27 @@ function showOfficeDetails(office, modalBody) {
                 <i class="fas fa-users"></i>
                 <strong>Kapacita:</strong> ${office.capacity}
             </div>
+            ${office.price ? `
+            <div class="detail-item">
+                <i class="fas fa-euro-sign"></i>
+                <strong>Nájem:</strong> ${office.price}
+            </div>` : ''}
+            ${office.utilities ? `
+            <div class="detail-item">
+                <i class="fas fa-bolt"></i>
+                <strong>Služby:</strong> ${office.utilities}
+            </div>` : ''}
+            ${office.deposit ? `
+            <div class="detail-item">
+                <i class="fas fa-shield-alt"></i>
+                <strong>Kauce:</strong> ${office.deposit}
+            </div>` : ''}
         </div>
+        
+        ${office.vatNote ? `
+        <div class="vat-note">
+            <i class="fas fa-info-circle"></i> ${office.vatNote}
+        </div>` : ''}
         
         <div class="modal-description">
             <h3>Popis</h3>
