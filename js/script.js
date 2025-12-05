@@ -94,14 +94,73 @@ document.addEventListener('DOMContentLoaded', function() {
         lastScroll = currentScroll;
     });
 
-    // Form submission
+    // Form submission with spam protection
     const contactForm = document.querySelector('.contact-form');
     if (contactForm) {
+        // Store form load time for time-based spam check
+        const formLoadTime = Date.now();
+        
         contactForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // Get form data
             const formData = new FormData(this);
+            
+            // SPAM CHECK 1: Honeypot field - if filled, it's a bot
+            const honeypot = formData.get('website');
+            if (honeypot && honeypot.trim() !== '') {
+                console.log('🚫 Spam detected: Honeypot field filled');
+                alert('Chyba při odesílání zprávy. Zkuste to prosím později.');
+                return;
+            }
+            
+            // SPAM CHECK 2: Time check - if submitted too fast (under 3 seconds), likely a bot
+            const timeSinceLoad = Date.now() - formLoadTime;
+            if (timeSinceLoad < 3000) {
+                console.log('🚫 Spam detected: Form submitted too fast');
+                alert('Prosím vyplňte formulář pozorněji.');
+                return;
+            }
+            
+            const name = formData.get('name');
+            const message = formData.get('message');
+            
+            // SPAM CHECK 3: Name validation - check if name looks reasonable
+            if (name && name.length > 3) {
+                // Check if name contains too many uppercase letters in a row (typical spam pattern)
+                const uppercaseRatio = (name.match(/[A-Z]/g) || []).length / name.length;
+                if (uppercaseRatio > 0.7) {
+                    console.log('🚫 Spam detected: Name has unusual uppercase pattern');
+                    alert('Prosím zadejte platné jméno.');
+                    return;
+                }
+                
+                // Check if name has no spaces and is very long (typical spam)
+                if (name.length > 15 && !name.includes(' ')) {
+                    console.log('🚫 Spam detected: Name is too long without spaces');
+                    alert('Prosím zadejte celé jméno včetně mezery.');
+                    return;
+                }
+            }
+            
+            // SPAM CHECK 4: Message validation - check if message looks reasonable
+            if (message && message.length > 5) {
+                // Check if message is all uppercase
+                const msgUppercaseRatio = (message.match(/[A-Z]/g) || []).length / message.replace(/\s/g, '').length;
+                if (msgUppercaseRatio > 0.8 && message.length > 10) {
+                    console.log('🚫 Spam detected: Message is mostly uppercase');
+                    alert('Prosím zadejte zprávu v normálním formátu.');
+                    return;
+                }
+                
+                // Check for random character strings (common spam pattern)
+                const hasRandomPattern = /^[A-Z]{15,}$/i.test(message.replace(/\s/g, ''));
+                if (hasRandomPattern) {
+                    console.log('🚫 Spam detected: Message contains random character pattern');
+                    alert('Prosím zadejte smysluplnou zprávu.');
+                    return;
+                }
+            }
             
             const inquiryData = {
                 type: 'contact',

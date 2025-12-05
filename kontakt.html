@@ -209,6 +209,12 @@
                         <textarea id="contact-message" name="message" rows="5" required></textarea>
                     </div>
                     
+                    <!-- Honeypot field - hidden from users, but bots will fill it -->
+                    <div class="honeypot-field" style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;">
+                        <label for="website">Webová stránka (nevyplňujte)</label>
+                        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                    </div>
+                    
                     <div class="form-group">
                         <label class="checkbox-label">
                             <input type="checkbox" name="consent" required>

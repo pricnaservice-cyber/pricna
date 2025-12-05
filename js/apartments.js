@@ -141,6 +141,10 @@ function showApartmentDetails(apartment) {
                 <div class="form-group">
                     <textarea name="message" rows="3" placeholder="Vaše zpráva"></textarea>
                 </div>
+                <!-- Honeypot field -->
+                <div style="position: absolute; left: -9999px; opacity: 0; pointer-events: none;">
+                    <input type="text" name="website" tabindex="-1" autocomplete="off">
+                </div>
                 <button type="submit" class="btn btn-primary">Odeslat poptávku</button>
             </form>
         </div>
@@ -152,6 +156,44 @@ async function handleInquiry(event, apartmentTitle) {
     event.preventDefault();
     
     const formData = new FormData(event.target);
+    
+    // SPAM CHECK 1: Honeypot field
+    const honeypot = formData.get('website');
+    if (honeypot && honeypot.trim() !== '') {
+        console.log('🚫 Spam detected in apartment inquiry: Honeypot field filled');
+        alert('Chyba při odesílání zprávy. Zkuste to prosím později.');
+        return;
+    }
+    
+    const name = formData.get('name');
+    const message = formData.get('message');
+    
+    // SPAM CHECK 2: Name validation
+    if (name && name.length > 3) {
+        const uppercaseRatio = (name.match(/[A-Z]/g) || []).length / name.length;
+        if (uppercaseRatio > 0.7) {
+            console.log('🚫 Spam detected: Name has unusual uppercase pattern');
+            alert('Prosím zadejte platné jméno.');
+            return;
+        }
+        
+        if (name.length > 15 && !name.includes(' ')) {
+            console.log('🚫 Spam detected: Name is too long without spaces');
+            alert('Prosím zadejte celé jméno včetně mezery.');
+            return;
+        }
+    }
+    
+    // SPAM CHECK 3: Message validation
+    if (message && message.length > 10) {
+        const hasRandomPattern = /^[A-Z]{15,}$/i.test(message.replace(/\s/g, ''));
+        if (hasRandomPattern) {
+            console.log('🚫 Spam detected: Message contains random character pattern');
+            alert('Prosím zadejte smysluplnou zprávu.');
+            return;
+        }
+    }
+    
     const inquiryData = {
         type: 'apartment',
         itemName: apartmentTitle,
