@@ -386,18 +386,32 @@ document.addEventListener('DOMContentLoaded', function() {
         
         bookingForm.addEventListener('submit', handleBookingSubmit);
         
-        // Auto-refresh reservations every 30 seconds to sync with admin panel
+        // Auto-refresh reservations every 60 seconds to sync with admin panel
+        // BUT: Don't refresh if user is actively using the booking form
         setInterval(async () => {
+            // Check if booking form is visible (user is filling it)
+            const bookingFormVisible = bookingForm && bookingForm.style.display !== 'none';
+            
+            // Check if any form field has focus (user is typing)
+            const formHasFocus = bookingForm && bookingForm.contains(document.activeElement);
+            
+            // Don't refresh if form is active
+            if (bookingFormVisible || formHasFocus) {
+                console.log('⏸️ Skipping auto-refresh - user is filling booking form');
+                return;
+            }
+            
             await loadReservations();
             renderCalendar();
-            // If user has date selected, refresh time slots too
+            
+            // If user has date selected (but not filling form), refresh time slots too
             if (selectedDate) {
                 const currentTimeSlots = document.getElementById('time-slots-grid');
                 if (currentTimeSlots) {
                     showTimeSlots(selectedDate);
                 }
             }
-        }, 30000); // 30 seconds
+        }, 60000); // 60 seconds (increased from 30)
     }
 
     // Render calendar
