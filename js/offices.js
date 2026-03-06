@@ -12,6 +12,10 @@ const officesData = {
         deposit: '10 000 Kč',
         vatNote: 'Příčná Offices s.r.o. je plátce DPH - uvedené ceny jsou bez DPH',
         description: 'Nabízíme k pronájmu útulnou kancelář o velikosti 15 m², ideální pro jednu až dvě osoby. Prostor se nachází v klidné a udržované budově, vhodné pro administrativní nebo podnikatelské účely. Kancelář je světlá, čistá a připravená k okamžitému nastěhování.',
+        images: [
+            'images/kancelar_pricna/15m_1.jpeg',
+            'images/kancelar_pricna/15m_2.jpeg'
+        ],
         features: [
             'Recepce v budově',
             'Klidné a příjemné pracovní prostředí',
@@ -58,6 +62,12 @@ const officesData = {
         deposit: '25 000 Kč',
         vatNote: 'Příčná Offices s.r.o. je plátce DPH - uvedené ceny jsou bez DPH',
         description: 'Nabízíme k pronájmu útulnou kancelář o velikosti 45 m², ideální pro menší firmu nebo tým lidí. Prostor se nachází v klidné a udržované budově, vhodné pro administrativní nebo podnikatelské účely. Kancelář je světlá, čistá a připravená k okamžitému nastěhování.',
+        images: [
+            'images/kancelar_pricna/45m_1.jpeg',
+            'images/kancelar_pricna/45m_2.jpeg',
+            'images/kancelar_pricna/45m_3.jpeg',
+            'images/kancelar_pricna/45m_4.jpeg'
+        ],
         features: [
             'Recepce v budově',
             'Klidné a příjemné pracovní prostředí',
@@ -79,6 +89,10 @@ const officesData = {
         deposit: '10 000 Kč',
         vatNote: 'Příčná Apartments s.r.o. je neplátce DPH - uvedené ceny jsou s DPH',
         description: 'Nabízíme k pronájmu útulnou kancelář o velikosti 15 m², ideální pro jednu až dvě osoby. Prostor se nachází v klidné a udržované budově, vhodné pro administrativní nebo podnikatelské účely. Kancelář je světlá, čistá a připravená k okamžitému nastěhování.',
+        images: [
+            'images/kancelar_pricna/15m_1.jpeg',
+            'images/kancelar_pricna/15m_2.jpeg'
+        ],
         features: [
             'Možnost využití recepce ve vedlejší budově',
             'Možnost instalace umyvadla',
@@ -101,10 +115,10 @@ const officesData = {
         vatNote: 'Příčná Apartments s.r.o. je neplátce DPH - uvedené ceny jsou s DPH',
         description: 'Nabízíme k pronájmu útulnou kancelář o velikosti 30 m², ideální pro dvě až čtyři osoby. Prostor se nachází v klidné a udržované budově, vhodné pro administrativní nebo podnikatelské účely. Kancelář je světlá, čistá a připravená k okamžitému nastěhování.',
         images: [
-            'images/kancelar_pricna/pricna_30_1.JPG',
-            'images/kancelar_pricna/pricna_30_2.JPG',
-            'images/kancelar_pricna/pricna_30_3.JPG',
-            'images/kancelar_pricna/Pricna_30_4.JPG'
+            'images/kancelar_pricna/30m_1.jpeg',
+            'images/kancelar_pricna/30m_2.jpeg',
+            'images/kancelar_pricna/30m_3.jpeg',
+            'images/kancelar_pricna/30m_4.jpeg'
         ],
         features: [
             'Možnost využití recepce ve vedlejší budově',
