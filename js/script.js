@@ -226,29 +226,17 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Load reservations from API
     async function loadReservations() {
-        try {
-            const response = await fetch('https://pricna-api.pricna-service.workers.dev/api/reservations/public');
-            if (response.ok) {
-                allReservations = await response.json();
-                console.log('✅ Loaded reservations:', allReservations.length, 'total');
-                
-                // Build bookedSlots from reservations (only active ones - cancelled are already filtered by API)
-                bookedSlots = {};
-                allReservations.forEach(reservation => {
-                    const times = reservation.time.split(', ');
-                    if (!bookedSlots[reservation.date]) {
-                        bookedSlots[reservation.date] = [];
-                    }
-                    bookedSlots[reservation.date].push(...times);
-                });
-                console.log('✅ Active reservations:', allReservations.length);
-                console.log('✅ Booked slots by date:', bookedSlots);
-            } else {
-                console.error('❌ Failed to load reservations:', response.status, response.statusText);
+        allReservations = await API.getPublicReservations();
+
+        // Build bookedSlots from reservations (cancelled are already filtered by API)
+        bookedSlots = {};
+        allReservations.forEach(reservation => {
+            const times = reservation.time.split(', ');
+            if (!bookedSlots[reservation.date]) {
+                bookedSlots[reservation.date] = [];
             }
-        } catch (error) {
-            console.error('❌ Error loading reservations:', error);
-        }
+            bookedSlots[reservation.date].push(...times);
+        });
     }
 
     // Available time slots (7:00 - 19:00, hourly, last booking 18:00-19:00)

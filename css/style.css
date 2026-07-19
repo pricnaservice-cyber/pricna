@@ -3103,3 +3103,297 @@ html {
         height: 250px;
     }
 }
+
+/* ============================================================
+   MODERN REFRESH 2026
+   Nový kabát webu - zachovává firemní zlatou a šedou,
+   modernizuje typografii, karty, tlačítka a stíny.
+   ============================================================ */
+
+:root {
+    --primary-color: #eabb11;
+    --primary-dark: #d4a00f;
+    --secondary-color: #7a848d;
+    --secondary-dark: #5a646d;
+    --ink: #1f2429;
+    --radius-sm: 10px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --shadow-soft: 0 6px 24px rgba(31, 36, 41, 0.07);
+    --shadow-hover: 0 18px 40px rgba(31, 36, 41, 0.14);
+}
+
+html {
+    background-color: #ffffff;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #3a4149;
+    font-size: 16.5px;
+    background-color: #ffffff;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+}
+
+/* --- Tlačítka --- */
+.btn {
+    border-radius: 999px;
+    padding: 13px 28px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(234, 187, 17, 0.35);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #f2c626, var(--primary-color));
+    box-shadow: 0 8px 22px rgba(234, 187, 17, 0.45);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: var(--secondary-dark);
+    box-shadow: 0 4px 14px rgba(90, 100, 109, 0.25);
+}
+
+/* --- Hlavička s blur efektem --- */
+header {
+    background-color: rgba(255, 255, 255, 0.85);
+    -webkit-backdrop-filter: saturate(160%) blur(14px);
+    backdrop-filter: saturate(160%) blur(14px);
+    box-shadow: 0 1px 0 rgba(31, 36, 41, 0.06);
+}
+
+.nav-links a {
+    font-weight: 600;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -6px;
+    transform: translateX(-50%) scaleX(0);
+    width: 60%;
+    height: 3px;
+    border-radius: 3px;
+    background: var(--primary-color);
+    transition: transform 0.25s ease;
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+    transform: translateX(-50%) scaleX(1);
+}
+
+/* --- Hero --- */
+.hero {
+    background:
+        linear-gradient(135deg, rgba(31, 36, 41, 0.72) 0%, rgba(31, 36, 41, 0.35) 55%, rgba(234, 187, 17, 0.28) 100%),
+        url('../images/pricna_ulice.jpg') center/cover no-repeat;
+}
+
+.hero h1 {
+    color: #fff;
+    font-size: clamp(2.5rem, 6vw, 4.2rem);
+    font-weight: 800;
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+}
+
+.hero p {
+    font-size: clamp(1.05rem, 2.2vw, 1.35rem);
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* --- Nadpisy sekcí se zlatým akcentem --- */
+.section h2,
+.services h2 {
+    text-align: center;
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    position: relative;
+    padding-bottom: 18px;
+    margin-bottom: 40px;
+}
+
+.section h2::after,
+.services h2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 64px;
+    height: 4px;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--primary-color), var(--primary-dark));
+}
+
+/* --- Page header (podstránky) --- */
+.page-header {
+    background:
+        linear-gradient(135deg, rgba(31, 36, 41, 0.78), rgba(90, 100, 109, 0.55)),
+        url('../images/pricna_ulice.jpg') center/cover no-repeat;
+}
+
+.page-header h1 {
+    color: #fff;
+    font-weight: 800;
+}
+
+.page-header::before {
+    background: linear-gradient(to top, rgba(255,255,255,1), transparent);
+}
+
+/* --- Karty (služby, kanceláře, byty, info) --- */
+.service-card,
+.office-card,
+.apartment-card,
+.info-card,
+.custom-offer-card,
+.reception-card {
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(31, 36, 41, 0.06);
+    box-shadow: var(--shadow-soft);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.service-card:hover,
+.office-card:hover,
+.apartment-card:hover,
+.info-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-hover);
+}
+
+.office-img-placeholder,
+.apartment-img-placeholder {
+    overflow: hidden;
+}
+
+.office-img-placeholder img,
+.apartment-img-placeholder img {
+    transition: transform 0.5s ease;
+}
+
+.office-card:hover .office-img-placeholder img,
+.apartment-card:hover .apartment-img-placeholder img {
+    transform: scale(1.06);
+}
+
+/* --- Názvy budov --- */
+.building-title {
+    display: inline-block;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.building-title::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 48px;
+    height: 4px;
+    border-radius: 4px;
+    background: var(--primary-color);
+}
+
+/* --- Načítání a prázdné stavy nabídek --- */
+.properties-loading {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 50px 20px;
+    color: var(--secondary-color);
+    font-size: 1.05rem;
+}
+
+.properties-loading i {
+    color: var(--primary-color);
+    margin-right: 10px;
+}
+
+.properties-empty {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 50px 20px;
+    background: var(--light-gray);
+    border-radius: var(--radius-md);
+    color: var(--secondary-dark);
+}
+
+.properties-empty i {
+    font-size: 2.2rem;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+    display: block;
+}
+
+/* --- Detail nemovitosti v modalu --- */
+.modal-property-details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 14px;
+    margin: 24px 0;
+    padding: 22px;
+    background: var(--light-gray);
+    border-radius: var(--radius-md);
+}
+
+.modal-property-details .detail-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.98rem;
+}
+
+.modal-property-details .detail-item i {
+    color: var(--primary-color);
+    width: 22px;
+    text-align: center;
+}
+
+.modal-content {
+    border-radius: var(--radius-lg);
+}
+
+/* --- Kalendář rezervací --- */
+.calendar-container,
+.booking-details {
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-soft);
+}
+
+.calendar-day.selected {
+    box-shadow: 0 4px 14px rgba(234, 187, 17, 0.45);
+}
+
+/* --- Patička --- */
+footer {
+    background: linear-gradient(160deg, #262c33 0%, #3c454e 100%);
+}
+
+.social-icon {
+    transition: transform 0.25s ease, background-color 0.25s ease;
+}
+
+.social-icon:hover {
+    transform: translateY(-4px) scale(1.08);
+}
+
+/* --- Plynulé objevování obsahu --- */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}

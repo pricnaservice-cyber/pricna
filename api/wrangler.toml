@@ -8,21 +8,20 @@ binding = "DB"
 database_name = "pricna-db"
 database_id = "349fbd92-9ef6-486f-bc7d-332ceb471c73"
 
+# R2 bucket pro fotky nemovitostí
+# Před prvním nasazením vytvořte: wrangler r2 bucket create pricna-images
+[[r2_buckets]]
+binding = "IMAGES"
+bucket_name = "pricna-images"
+
 # Environment Variables
 [vars]
 NODE_ENV = "production"
-PORT = "8787"
 FRONTEND_URL = "https://pricna.cz"
 ADMIN_URL = "https://rezervace.pricna.cz"
 
-# Secrets (nastavíte přes wrangler secret)
-# MAILTRAP_HOST
-# MAILTRAP_PORT
-# MAILTRAP_USER
-# MAILTRAP_PASS
-# EMAIL_RESERVATIONS
-# EMAIL_INFO
-# EMAIL_OWNER
-# JWT_SECRET
-# ADMIN_USERNAME
-# ADMIN_PASSWORD_HASH
+# Secrets (nastavíte přes `wrangler secret put NAZEV`, lokálně přes .dev.vars):
+# MAILTRAP_PASS        - API token Mailtrap (bez něj se e-maily neodesílají)
+# JWT_SECRET           - náhodný řetězec min. 32 znaků
+# ADMIN_USERNAME       - přihlašovací jméno admina
+# ADMIN_PASSWORD_HASH  - hash hesla, vygenerujte: node hash-password.mjs VaseHeslo

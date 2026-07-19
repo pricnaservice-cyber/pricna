@@ -22,7 +22,10 @@
     <link rel="icon" type="image/png" sizes="16x16" href="images/fav_icon_final.png">
     <link rel="apple-touch-icon" sizes="180x180" href="images/fav_icon_final.png">
     <link rel="shortcut icon" href="images/fav_icon_final.png">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css?v=3">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
     <!-- Structured Data -->
@@ -86,40 +89,14 @@
         <div class="container">
             <h2 class="section-heading-styled fade-in">Dostupné byty</h2>
             
-            <div class="apartments-grid">
-                <!-- Apartment 1 -->
-                <div class="apartment-card scale-in" style="animation-delay: 0.1s;">
-                    <div class="apartment-img-placeholder">
-                        <img src="images/Byty/byt_11_kuchyne.JPG" alt="Byt 1+kk">
-                    </div>
-                    <div class="apartment-info">
-                        <h3>Byt 1+kk</h3>
-                        <p class="apartment-size"><i class="fas fa-ruler-combined"></i> 29 m²</p>
-                        <p class="apartment-location"><i class="fas fa-map-marker-alt"></i> Příčná, Havířov</p>
-                        <p class="apartment-price"><i class="fas fa-euro-sign"></i> 5 330 Kč/měsíc</p>
-                        <button class="btn btn-primary apartment-detail-btn" data-apartment="apt-1">Více informací</button>
-                    </div>
-                </div>
-
-                <!-- Apartment 2 -->
-                <div class="apartment-card scale-in" style="animation-delay: 0.3s;">
-                    <div class="apartment-img-placeholder">
-                        <i class="fas fa-image"></i>
-                    </div>
-                    <div class="apartment-info">
-                        <h3>Byt 2+kk</h3>
-                        <p class="apartment-size"><i class="fas fa-ruler-combined"></i> 43 m²</p>
-                        <p class="apartment-location"><i class="fas fa-map-marker-alt"></i> Příčná, Havířov</p>
-                        <p class="apartment-price"><i class="fas fa-euro-sign"></i> 8 130 Kč/měsíc</p>
-                        <button class="btn btn-primary apartment-detail-btn" data-apartment="apt-2">Více informací</button>
-                    </div>
-                </div>
+            <div class="apartments-grid" data-apartments>
+                <div class="properties-loading"><i class="fas fa-spinner fa-spin"></i> Načítám nabídku...</div>
             </div>
         </div>
     </section>
 
-    <!-- Apartment Detail Modal -->
-    <div id="apartment-modal" class="modal">
+    <!-- Property Detail Modal -->
+    <div id="property-modal" class="modal">
         <div class="modal-content">
             <span class="modal-close">&times;</span>
             <div id="modal-body">
@@ -155,6 +132,6 @@
 
     <script src="js/api.js"></script>
     <script src="js/script.js"></script>
-    <script src="js/apartments.js"></script>
+    <script src="js/properties.js"></script>
 </body>
 </html>

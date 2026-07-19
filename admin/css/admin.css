@@ -1,6 +1,6 @@
 :root {
-    --primary-color: #2c5f8d;
-    --secondary-color: #1a3a54;
+    --primary-color: #d4a00f;   /* firemní zlatá (tmavší odstín kvůli kontrastu) */
+    --secondary-color: #5a646d; /* firemní šedá */
     --success-color: #28a745;
     --warning-color: #ffc107;
     --danger-color: #dc3545;
@@ -1041,5 +1041,264 @@ body {
     
     .detail-grid {
         grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================
+   ZÁLOŽKY ADMIN PANELU
+   ============================================ */
+
+.admin-tabs {
+    background: white;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.admin-tabs .container {
+    display: flex;
+    gap: 8px;
+}
+
+.admin-tab {
+    background: none;
+    border: none;
+    border-bottom: 3px solid transparent;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 600;
+    color: #666;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.2s, border-color 0.2s;
+}
+
+.admin-tab:hover {
+    color: var(--primary-color);
+}
+
+.admin-tab.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+}
+
+/* ============================================
+   SPRÁVA NEMOVITOSTÍ
+   ============================================ */
+
+.filter-group {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.property-filter.active {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+}
+
+.property-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    margin-bottom: 12px;
+    background: white;
+    transition: box-shadow 0.2s;
+}
+
+.property-row:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.property-row.unpublished {
+    opacity: 0.6;
+    background: var(--light-gray);
+}
+
+.property-thumb {
+    width: 90px;
+    height: 68px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa;
+    font-size: 24px;
+    flex-shrink: 0;
+}
+
+.property-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.property-row-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.property-row-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+    font-size: 16px;
+}
+
+.property-type-badge {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 2px 10px;
+    border-radius: 12px;
+    background: #eef3f8;
+    color: var(--secondary-color);
+}
+
+.property-type-badge.office { background: #fdf3d5; color: #9a7607; }
+.property-type-badge.apartment { background: #e4ecf4; color: #3e5871; }
+.property-type-badge.draft { background: #f1d7d9; color: #a33; }
+
+.property-row-meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 13px;
+    color: #666;
+}
+
+.property-row-meta i {
+    margin-right: 4px;
+    color: var(--primary-color);
+}
+
+.property-row-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.btn-sm {
+    padding: 8px 12px;
+    font-size: 13px;
+}
+
+/* Formulář nemovitosti */
+
+.modal-content-wide {
+    max-width: 760px;
+    width: 95%;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 10px;
+}
+
+.checkbox-label {
+    display: flex !important;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.checkbox-label input[type="checkbox"] {
+    width: auto;
+    transform: scale(1.3);
+}
+
+.prop-images-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.prop-image-item {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    aspect-ratio: 4 / 3;
+}
+
+.prop-image-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.prop-image-item .main-badge {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    background: var(--primary-color);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+}
+
+.prop-image-actions {
+    position: absolute;
+    inset: auto 0 0 0;
+    display: flex;
+    justify-content: space-between;
+    background: rgba(0,0,0,0.55);
+    padding: 4px 6px;
+}
+
+.prop-image-actions button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 13px;
+    padding: 4px 6px;
+}
+
+.prop-image-actions button:disabled {
+    opacity: 0.3;
+    cursor: default;
+}
+
+.prop-image-actions button:hover:not(:disabled) {
+    color: var(--warning-color);
+}
+
+.upload-btn {
+    cursor: pointer;
+}
+
+.upload-status {
+    margin-left: 12px;
+    font-size: 13px;
+    color: var(--secondary-color);
+}
+
+.no-images {
+    color: #999;
+    font-size: 14px;
+    padding: 8px 0;
+}
+
+@media (max-width: 640px) {
+    .property-row {
+        flex-wrap: wrap;
+    }
+    .property-row-actions {
+        width: 100%;
+        justify-content: flex-end;
     }
 }
